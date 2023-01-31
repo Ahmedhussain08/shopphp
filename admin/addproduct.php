@@ -4,8 +4,8 @@ if(isset($_POST['btn'])){
     $name = $_POST['name'];
     $price = $_POST['price'];
     $desc = $_POST['desc'];
-    $imagename = $_FILES["filename"]["name"];
-    $imagelocation = $_FILES["filename"]["tmp_name"];
+    $imagename = $_FILES['filename']['name'];
+    $imagelocation = $_FILES['filename']['tmp_name'];
     $catid  = $_POST['catid'];
     $brandid  = $_POST['brandid'];
     move_uploaded_file($imagelocation,'productimages/'.$imagename);
@@ -15,7 +15,6 @@ if(isset($_POST['btn'])){
         NEW PRODUCT ADDED!.
       </div>';
     }
-   
 }
 ?>
 <!DOCTYPE html>

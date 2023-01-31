@@ -219,6 +219,19 @@
                            
                         </ul>
                     </li>
+                    <li>
+                        <a href="javascript:;"><i class="sidebar-item-icon fa fa-bookmark"></i>
+                            <span class="nav-label">Product</span><i class="fa fa-angle-left arrow"></i></a>
+                        <ul class="nav-2-level collapse">
+                            <li>
+                                <a href="index.php?addproduct">add Product</a>
+                            </li>
+                            <li>
+                                <a href="index.php?viewbrand">View Product</a>
+                            </li>
+                           
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </nav>
@@ -240,6 +253,9 @@
                 }
                 elseif(isset($_GET['viewbrand'])){
                     include("viewbrand.php");
+                }
+                elseif(isset($_GET['addproduct'])){
+                    include("addproduct.php");
                 }
                 else{
                     echo '<div class="col-lg-3 col-md-6">

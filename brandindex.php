@@ -771,7 +771,11 @@ require("connect.php");
 				<div class="row mx-auto text-center gy-2 gx- bg-light">
 					<div class="col-md-4 col-lg-3 ">
 						<?php
-						$product = mysqli_query($con, "select * from product");
+                        if(isset($_GET['branddetail']))
+                        {
+                        $brandid = $_GET['branddetail'];
+                        
+						$product = mysqli_query($con, "select * from product where brandID = '$brandid'");
 						while ($row = mysqli_fetch_array($product)) {
 						?>
 							<div id="card" class="card my-2" style="width: 18rem;">
@@ -779,11 +783,12 @@ require("connect.php");
 								<div class="card-body bg-dark">
 									<h5 class="card-title text-light mb-3"> <?php echo $row[1] ?></h5>
 									<p class="card-text text-light text-muted mt-2"> <?php echo $row[3] ?> </p>
-									<a href="Chilrenschool.html" class="btn btn-primary my-3">See Facilities</a>
+									<a href="" class="text-white  btn border border-primary my-3">RS. <?php echo $row[2] ?></a>
 								</div>
 							</div>
 					</div>
-				    <?php } ?>
+				    <?php }
+                    } ?>
 					
 					
 					<!-- Load more -->

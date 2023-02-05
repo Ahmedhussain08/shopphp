@@ -48,13 +48,13 @@ include ('connect.php');
                          
                          }
                          if(isset($_GET['editid'])){
-                            $ed = $_GET['editid'];
-                           
-                            if(isset($_POST['btn'])){
-                                $name = $_POST['name'];
-                                $edit = mysqli_query($con,"UPDATE category SET cname = '$name' WHERE cid = '$ed' ");
+                             
+                             $ed = $_GET['editid'];
+                             if(isset($_POST['editbtn'])){
+                                $editname = $_POST['name'];
+                                $edit = mysqli_query($con,"UPDATE `category` SET `cname` = '$editname' WHERE `category`.`cid` = '$ed'");
                                 
-                                header("location:index.php?viewcat");
+                                // header("location:index.php?viewcat");
                             }
                         }
    
@@ -84,7 +84,7 @@ include ('connect.php');
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button name="btn" type="submit" class="btn btn-primary">Save changes</button>
+                    <button name="editbtn" type="submit" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
         </div>

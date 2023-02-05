@@ -6,11 +6,25 @@ require("connect.php");
 
 <head>
 	<style>
-		#card .card-title,.card-text {
+		.white{
+			background-color: hsl(223, 16%, 91%);
+		}
+		#card .card-title,
+		.card-text {
 			display: -webkit-box !important;
 			-webkit-line-clamp: 1 !important;
 			-webkit-box-orient: vertical !important;
 			overflow: hidden;
+		}
+
+		#card  {
+			transition: 0.1s ease-in-out;
+		}
+
+		#card:hover  {
+			transform: scale(1.040);
+			border :2px solid black !important;
+			box-shadow: 2px 2px solid black;
 		}
 	</style>
 	<title>Home</title>
@@ -111,7 +125,7 @@ require("connect.php");
 									<?php $cat = mysqli_query($con, "select * from brand");
 									while ($row = mysqli_fetch_array($cat)) {
 									?>
-							<li><a href="brandindex.php?branddetail=<?php echo $row[0] ?>"> <?php echo $row[1] ?> </a></li>
+										<li><a href="brandindex.php?branddetail=<?php echo $row[0] ?>"> <?php echo $row[1] ?> </a></li>
 
 
 
@@ -516,9 +530,9 @@ require("connect.php");
 
 
 	<!-- Product -->
-	<section class="bg0 p-t-23 p-b-140">
+	<section class="bg0 p-t-23 p-b-23">
 		<div class="container">
-			<div class="p-b-10">
+			<div class="p-b-5">
 				<h3 class="ltext-103 cl5">
 					Product Overview
 				</h3>
@@ -767,35 +781,35 @@ require("connect.php");
 			</div>
 
 
-			<div class="container ">
-				<div class="row mx-auto text-center gy-2 gx- bg-light">
-					<div class="col-md-4 col-lg-3 ">
-						<?php
-						$product = mysqli_query($con, "select * from product");
-						while ($row = mysqli_fetch_array($product)) {
-						?>
-							<div id="card" class="card my-2" style="width: 18rem;">
-								<img src="admin/productimages/<?php echo $row[4] ?>" class="card-img-top img-fluid" alt="...">
-								<div class="card-body bg-dark">
-									<h5 class="card-title text-light mb-3"> <?php echo $row[1] ?></h5>
-									<p class="card-text text-light text-muted mt-2"> <?php echo $row[3] ?> </p>
-									<a href="Chilrenschool.html" class="btn btn-primary my-3">See Facilities</a>
-								</div>
-							</div>
-					</div>
-				    <?php } ?>
-					
-					
-					<!-- Load more -->
-					<div class="flex-c-m flex-w w-full p-t-45">
-						<a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
-							Load More
-						</a>
-					</div>
-				</div>
-				</div>
 	</section>
+	<section class="p-3 bg-secondary">
 
+		<div class="container">
+			<div class="row text-center">
+				<?php
+				$product = mysqli_query($con, "select * from product");
+				while ($row = mysqli_fetch_array($product)) {
+				?>
+					<div class="col-md-4 col-lg-3 col-sm-5 mx-auto">
+						<div id="card" class="card my-1 bg-dark" style="width: 15rem;">
+							<img src="admin/productimages/<?php echo $row[4] ?>" class="card-img-top img-fluid " alt="...">
+							<div class="card-body white">
+								<h5 class="card-title text- fw-bold mb-3"> <?php echo $row[1] ?></h5>
+								<p class="card-text  text- mt-2"> <?php echo $row[3] ?> </p>
+								<a href="" class=" btn text-white my-3 bg1 bor1 hov-btn1"> RS. <?php echo $row[2] ?> </a>
+							</div>
+						</div>
+					</div>
+				<?php } ?>
+				<div class="flex-c-m flex-w w-full p-t-45">
+					<a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
+						Load More
+					</a>
+				</div>
+			</div>
+		</div>
+
+	</section>
 
 	<!-- Footer -->
 	<footer class="bg3 p-t-75 p-b-32">

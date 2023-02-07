@@ -1,3 +1,6 @@
+<?php
+include("connect.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,7 +41,7 @@
 <body class="animsition">
 	
 	<!-- Header -->
-	<header class="header-v4">
+	<header>
 		<!-- Header desktop -->
 		<div class="container-menu-desktop">
 			<!-- Topbar -->
@@ -68,10 +71,10 @@
 				</div>
 			</div>
 
-			<div class="wrap-menu-desktop how-shadow1">
+			<div class="wrap-menu-desktop">
 				<nav class="limiter-menu-desktop container">
-					
-					<!-- Logo desktop -->		
+
+					<!-- Logo desktop -->
 					<a href="#" class="logo">
 						<img src="images/icons/logo-01.png" alt="IMG-LOGO">
 					</a>
@@ -79,25 +82,36 @@
 					<!-- Menu desktop -->
 					<div class="menu-desktop">
 						<ul class="main-menu">
-							<li>
-								<a href="index.php">Home</a>
+							<li class="active-menu">
+								<a href="index.php">CATEGORIES</a>
 								<ul class="sub-menu">
-									<li><a href="index.php">Homepage 1</a></li>
-									<li><a href="home-02.html">Homepage 2</a></li>
-									<li><a href="home-03.html">Homepage 3</a></li>
+									<?php $cat = mysqli_query($con, "select * from category");
+									while ($row = mysqli_fetch_array($cat)) {
+									?>
+										<li><a href="catindex.php?catdetail= <?php echo $row[0] ?>"> <?php echo $row[1] ?> </a></li>
+
+
+
+									<?php } ?>
+								</ul>
+							</li>
+							<li class="">
+								<a href="index.php">BRANDS</a>
+								<ul class="sub-menu">
+									<?php $cat = mysqli_query($con, "select * from brand");
+									while ($row = mysqli_fetch_array($cat)) {
+									?>
+										<li><a href="brandindex.php?branddetail=<?php echo $row[0] ?>"> <?php echo $row[1] ?> </a></li>
+
+
+
+
+									<?php } ?>
 								</ul>
 							</li>
 
 							<li>
 								<a href="product.html">Shop</a>
-							</li>
-
-							<li class="label1" data-label1="hot">
-								<a href="shoping-cart.html">Features</a>
-							</li>
-
-							<li>
-								<a href="blog.html">Blog</a>
 							</li>
 
 							<li>
@@ -108,7 +122,7 @@
 								<a href="contact.html">Contact</a>
 							</li>
 						</ul>
-					</div>	
+					</div>
 
 					<!-- Icon header -->
 					<div class="wrap-icon-header flex-w flex-r-m">
@@ -120,17 +134,17 @@
 							<i class="zmdi zmdi-shopping-cart"></i>
 						</div>
 
-						<a href="#" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
+						<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
 							<i class="zmdi zmdi-favorite-outline"></i>
 						</a>
 					</div>
 				</nav>
-			</div>	
+			</div>
 		</div>
 
 		<!-- Header Mobile -->
 		<div class="wrap-header-mobile">
-			<!-- Logo moblie -->		
+			<!-- Logo moblie -->
 			<div class="logo-mobile">
 				<a href="index.php"><img src="images/icons/logo-01.png" alt="IMG-LOGO"></a>
 			</div>
@@ -328,7 +342,7 @@
 
 
 	<!-- breadcrumb -->
-	<div class="container">
+	<!-- <div class="container">
 		<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
 			<a href="index.php" class="stext-109 cl8 hov-cl1 trans-04">
 				Home
@@ -344,95 +358,49 @@
 				Lightweight Jacket
 			</span>
 		</div>
-	</div>
+	</div> -->
 		
 
 	<!-- Product Detail -->
 	<section class="sec-product-detail bg0 p-t-65 p-b-60">
 		<div class="container">
-			<div class="row">
-				<div class="col-md-6 col-lg-7 p-b-30">
-					<div class="p-l-25 p-r-30 p-lr-0-lg">
-						<div class="wrap-slick3 flex-sb flex-w">
-							<div class="wrap-slick3-dots"></div>
-							<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
-
-							<div class="slick3 gallery-lb">
-								<div class="item-slick3" data-thumb="images/product-detail-01.jpg">
-									<div class="wrap-pic-w pos-relative">
-										<img src="images/product-detail-01.jpg" alt="IMG-PRODUCT">
-
-										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-01.jpg">
-											<i class="fa fa-expand"></i>
-										</a>
-									</div>
-								</div>
-
-								<div class="item-slick3" data-thumb="images/product-detail-02.jpg">
-									<div class="wrap-pic-w pos-relative">
-										<img src="images/product-detail-02.jpg" alt="IMG-PRODUCT">
-
-										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-02.jpg">
-											<i class="fa fa-expand"></i>
-										</a>
-									</div>
-								</div>
-
-								<div class="item-slick3" data-thumb="images/product-detail-03.jpg">
-									<div class="wrap-pic-w pos-relative">
-										<img src="images/product-detail-03.jpg" alt="IMG-PRODUCT">
-
-										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-03.jpg">
-											<i class="fa fa-expand"></i>
-										</a>
-									</div>
-								</div>
+			<div class="row my-2 p-2">
+				
+				<?php  
+				if(isset($_GET['productid']))
+				{
+					$proid = $_GET['productid'];
+					$p = mysqli_query($con, "select * from product where pid = '$proid'");
+					while ($row = mysqli_fetch_array($p)) {
+						?>
+						<div class="col-md-6 col-lg-7 p-b-30 ">
+									<img src="admin/productimages/<?php echo $row[4] ?>" class=" img-fluid h-100" alt="...">
+									
 							</div>
-						</div>
-					</div>
-				</div>
-					
-				<div class="col-md-6 col-lg-5 p-b-30">
+							<div class="col-md-6 col-lg-5 p-b-30">
 					<div class="p-r-50 p-t-5 p-lr-0-lg">
 						<h4 class="mtext-105 cl2 js-name-detail p-b-14">
-							Lightweight Jacket
+							<?php echo $row[1] ?>
 						</h4>
 
-						<span class="mtext-106 cl2">
-							$58.79
+						<span class="mtext-106 cl2"> RS. 
+						<?php echo $row[2] ?>
+
 						</span>
 
 						<p class="stext-102 cl3 p-t-23">
-							Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.
+						<?php echo $row[3] ?>
+
 						</p>
-						
-						<!--  -->
 						<div class="p-t-33">
-							<div class="flex-w flex-r-m p-b-10">
-								<div class="size-203 flex-c-m respon6">
-									Size
-								</div>
-
-								<div class="size-204 respon6-next">
-									<div class="rs1-select2 bor8 bg0">
-										<select class="js-select2" name="time">
-											<option>Choose an option</option>
-											<option>Size S</option>
-											<option>Size M</option>
-											<option>Size L</option>
-											<option>Size XL</option>
-										</select>
-										<div class="dropDownSelect2"></div>
-									</div>
-								</div>
-							</div>
+							
 
 							<div class="flex-w flex-r-m p-b-10">
-								<div class="size-203 flex-c-m respon6">
-									Color
+								<div class="size-203 flex respon6 fw-bold">
+									COLOR
 								</div>
 
-								<div class="size-204 respon6-next">
+								<div class="size-204 respon6-next ">
 									<div class="rs1-select2 bor8 bg0">
 										<select class="js-select2" name="time">
 											<option>Choose an option</option>
@@ -446,23 +414,23 @@
 								</div>
 							</div>
 
-							<div class="flex-w flex-r-m p-b-10">
+							 <div class="flex-w flex p-b-10 ">
 								<div class="size-204 flex-w flex-m respon6-next">
-									<div class="wrap-num-product flex-w m-r-20 m-tb-10">
+									<div class="wrap-num-product flex-w m-r-2 m-tb-10">
 										<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
 											<i class="fs-16 zmdi zmdi-minus"></i>
 										</div>
 
-										<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
+										<input class="mtext-104 cl3 txt-center num-product my-2" type="number" name="num-product" value="1">
 
 										<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
 											<i class="fs-16 zmdi zmdi-plus"></i>
 										</div>
 									</div>
 
-									<button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+								 <button class="my-3 flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
 										Add to cart
-									</button>
+									</button>   
 								</div>
 							</div>	
 						</div>
@@ -489,6 +457,11 @@
 						</div>
 					</div>
 				</div>
+						<?php } 
+				}
+				?>
+					
+				
 			</div>
 
 			<div class="bor10 m-t-50 p-t-43 p-b-40">
@@ -679,7 +652,7 @@
 
 
 	<!-- Related Products -->
-	<section class="sec-relate-product bg0 p-t-45 p-b-105">
+	<!-- <section class="sec-relate-product bg0 p-t-45 p-b-105">
 		<div class="container">
 			<div class="p-b-45">
 				<h3 class="ltext-106 cl5 txt-center">
@@ -687,12 +660,12 @@
 				</h3>
 			</div>
 
-			<!-- Slide2 -->
-			<div class="wrap-slick2">
+			Slide2 -->
+			<!-- <div class="wrap-slick2">
 				<div class="slick2">
 					<div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
 						<!-- Block2 -->
-						<div class="block2">
+						<!-- <div class="block2">
 							<div class="block2-pic hov-img0">
 								<img src="images/product-01.jpg" alt="IMG-PRODUCT">
 
@@ -724,7 +697,7 @@
 
 					<div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
 						<!-- Block2 -->
-						<div class="block2">
+						<!-- <div class="block2">
 							<div class="block2-pic hov-img0">
 								<img src="images/product-02.jpg" alt="IMG-PRODUCT">
 
@@ -756,7 +729,7 @@
 
 					<div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
 						<!-- Block2 -->
-						<div class="block2">
+						<!-- <div class="block2">
 							<div class="block2-pic hov-img0">
 								<img src="images/product-03.jpg" alt="IMG-PRODUCT">
 
@@ -774,8 +747,8 @@
 									<span class="stext-105 cl3">
 										$25.50
 									</span>
-								</div>
-
+								</div> -->
+<!-- 
 								<div class="block2-txt-child2 flex-r p-t-3">
 									<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
 										<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON">
@@ -788,16 +761,16 @@
 
 					<div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
 						<!-- Block2 -->
-						<div class="block2">
+						<!-- <div class="block2">
 							<div class="block2-pic hov-img0">
 								<img src="images/product-04.jpg" alt="IMG-PRODUCT">
 
 								<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 									Quick View
 								</a>
-							</div>
+							</div> --> -->
 
-							<div class="block2-txt flex-w flex-t p-t-14">
+							<!-- <div class="block2-txt flex-w flex-t p-t-14">
 								<div class="block2-txt-child1 flex-col-l ">
 									<a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 										Classic Trench Coat
@@ -816,11 +789,11 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> -->
 
-					<div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
+					<!-- <div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
 						<!-- Block2 -->
-						<div class="block2">
+						<!-- <div class="block2">
 							<div class="block2-pic hov-img0">
 								<img src="images/product-05.jpg" alt="IMG-PRODUCT">
 
@@ -848,20 +821,20 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> -->
 
-					<div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
+					<!-- <div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
 						<!-- Block2 -->
-						<div class="block2">
+						<!-- <div class="block2">
 							<div class="block2-pic hov-img0">
 								<img src="images/product-06.jpg" alt="IMG-PRODUCT">
 
 								<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 									Quick View
 								</a>
-							</div>
+							</div> --> -->
 
-							<div class="block2-txt flex-w flex-t p-t-14">
+							<!-- <div class="block2-txt flex-w flex-t p-t-14">
 								<div class="block2-txt-child1 flex-col-l ">
 									<a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 										Vintage Inspired Classic 
@@ -880,19 +853,19 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> -->
 
-					<div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
+					<!-- <div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
 						<!-- Block2 -->
-						<div class="block2">
+						<!-- <div class="block2">
 							<div class="block2-pic hov-img0">
 								<img src="images/product-07.jpg" alt="IMG-PRODUCT">
 
 								<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 									Quick View
 								</a>
-							</div>
-
+							</div> -->
+<!-- 
 							<div class="block2-txt flex-w flex-t p-t-14">
 								<div class="block2-txt-child1 flex-col-l ">
 									<a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
@@ -902,8 +875,8 @@
 									<span class="stext-105 cl3">
 										$52.66
 									</span>
-								</div>
-
+								</div> --> -->
+<!-- 
 								<div class="block2-txt-child2 flex-r p-t-3">
 									<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
 										<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON">
@@ -912,43 +885,43 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> --> -->
 
-					<div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
+					<!-- <div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
 						<!-- Block2 -->
-						<div class="block2">
+						<!-- <div class="block2">
 							<div class="block2-pic hov-img0">
 								<img src="images/product-08.jpg" alt="IMG-PRODUCT">
 
 								<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 									Quick View
 								</a>
-							</div>
+							</div> --> -->
 
-							<div class="block2-txt flex-w flex-t p-t-14">
+							<!-- <div class="block2-txt flex-w flex-t p-t-14">
 								<div class="block2-txt-child1 flex-col-l ">
 									<a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 										Pieces Metallic Printed
-									</a>
-
+									</a> -->
+<!-- 
 									<span class="stext-105 cl3">
 										$18.96
 									</span>
-								</div>
+								</div> -->
 
-								<div class="block2-txt-child2 flex-r p-t-3">
+								<!-- <div class="block2-txt-child2 flex-r p-t-3">
 									<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
 										<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON">
 										<img class="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON">
 									</a>
 								</div>
 							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+						</div> -->
+					<!-- </div> -->
+				<!-- </div>
+			</div> --> 
 		</div>
-	</section>
+									</section>
 		
 
 	<!-- Footer -->

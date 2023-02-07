@@ -796,7 +796,8 @@ require("connect.php");
 							<div class="card-body white">
 								<h5 class="card-title text- fw-bold mb-3"> <?php echo $row[1] ?></h5>
 								<p class="card-text  text- mt-2"> <?php echo $row[3] ?> </p>
-								<a href="" class=" btn text-white my-3 bg1 bor1 hov-btn1"> RS. <?php echo $row[2] ?> </a>
+								<p href="" class="text-primary mt-2 fw-bold"> RS. <?php echo $row[2] ?> </p>
+								<a href="product-detail.php?productid=<?php echo $row[0] ?>" class=" btn text-white my-3 bg1 bor1 hov-btn1"> BUY NOW  </a>
 							</div>
 						</div>
 					</div>

@@ -10,6 +10,6 @@ if(isset($_POST['add_to_cart'])){
 
     // print_r($product);
     $_SESSION[$name]= $product;
-    header("location:product-detail.php");
+    header("location:shoping-cart.php");
 }
 ?>

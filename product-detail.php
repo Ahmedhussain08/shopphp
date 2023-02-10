@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("connect.php");
 ?>
 <!DOCTYPE html>
@@ -364,6 +365,8 @@ include("connect.php");
 	<!-- Product Detail -->
 	<section class="sec-product-detail bg0 p-t-65 p-b-60">
 		<div class="container">
+			<form action="cart.php" method="post">
+
 			<div class="row my-2 p-2">
 				
 				<?php  
@@ -428,11 +431,14 @@ include("connect.php");
 										</div>
 									</div>
 
-								 <button class="my-3 flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+								 <button name="add_to_cart" class="my-3 flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
 										Add to cart
 									</button>   
 								</div>
+								<input type="hidden" name="hiddenname" value="<?php echo $row[1] ?>">
+                                 <input type="hidden" name="hiddenprice" value="<?php echo $row[2] ?>"> 
 							</div>	
+							<input class="form-control" type="number" name="qty" id="">
 						</div>
 
 						<!--  -->
@@ -463,6 +469,7 @@ include("connect.php");
 					
 				
 			</div>
+			</form>
 
 			<div class="bor10 m-t-50 p-t-43 p-b-40">
 				<!-- Tab01 -->

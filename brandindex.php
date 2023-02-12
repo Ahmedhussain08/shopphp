@@ -1,4 +1,5 @@
 <?php
+session_start();
 require("connect.php");
 ?>
 <!DOCTYPE html>
@@ -140,8 +141,8 @@ require("connect.php");
 							<i class="zmdi zmdi-search"></i>
 						</div>
 
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
-							<i class="zmdi zmdi-shopping-cart"></i>
+						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11  icon-header-noti" data-notify="<?php if(isset($_SESSION['cart'])) {echo count($_SESSION['cart']);} else{echo 0;} ?>">
+							<a href="shoping-cart.php"><i class="zmdi zmdi-shopping-cart"></i></a>
 						</div>
 
 						<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
@@ -783,7 +784,9 @@ require("connect.php");
 								<div class="card-body bg-dark">
 									<h5 class="card-title text-light mb-3"> <?php echo $row[1] ?></h5>
 									<p class="card-text text-light text-muted mt-2"> <?php echo $row[3] ?> </p>
-									<a href="" class="text-white  btn border border-primary my-3">RS. <?php echo $row[2] ?></a>
+									<p href="" class="text-primary mt-2 fw-bold"> RS. <?php echo $row[2] ?> </p>
+									<a href="product-detail.php?productid=<?php echo $row[0] ?>" class=" btn text-white my-3 bg1 bor1 hov-btn1"> BUY NOW  </a>
+								
 								</div>
 							</div>
 					</div>

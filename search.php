@@ -1,17 +1,39 @@
 <?php
 session_start();
 require("connect.php");
+
+if(isset($_GET['search'])){
+    $search = $_GET['search'];
+}
+else{
+	header("location:index.php");
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 	<style>
-		#card .card-title,.card-text {
+		.white{
+			background-color: hsl(223, 16%, 91%);
+		}
+		#card .card-title,
+		.card-text {
 			display: -webkit-box !important;
 			-webkit-line-clamp: 1 !important;
 			-webkit-box-orient: vertical !important;
 			overflow: hidden;
+		}
+
+		#card  {
+			transition: 0.1s ease-in-out;
+		}
+
+		#card:hover  {
+			transform: scale(1.040);
+			border :2px solid black !important;
+			box-shadow: 2px 2px solid black;
 		}
 	</style>
 	<title>Home</title>
@@ -112,7 +134,7 @@ require("connect.php");
 									<?php $cat = mysqli_query($con, "select * from brand");
 									while ($row = mysqli_fetch_array($cat)) {
 									?>
-							<li><a href="brandindex.php?branddetail=<?php echo $row[0] ?>"> <?php echo $row[1] ?> </a></li>
+										<li><a href="brandindex.php?branddetail=<?php echo $row[0] ?>"> <?php echo $row[1] ?> </a></li>
 
 
 
@@ -141,7 +163,7 @@ require("connect.php");
 							<i class="zmdi zmdi-search"></i>
 						</div>
 
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11  icon-header-noti" data-notify="<?php if(isset($_SESSION['cart'])) {echo count($_SESSION['cart']);} else{echo 0;} ?>">
+							<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="<?php if(isset($_SESSION['cart'])) {echo count($_SESSION['cart']);} else{echo 0;} ?>">
 							<a href="shoping-cart.php"><i class="zmdi zmdi-shopping-cart"></i></a>
 						</div>
 
@@ -256,8 +278,8 @@ require("connect.php");
 					<img src="images/icons/icon-close2.png" alt="CLOSE">
 				</button>
 
-				<form class="wrap-search-header flex-w p-l-15">
-					<button class="flex-c-m trans-04">
+				<form action="search.php" method="GET" class="wrap-search-header flex-w p-l-15">
+					<button type="submit" class="flex-c-m trans-04">
 						<i class="zmdi zmdi-search"></i>
 					</button>
 					<input class="plh3" type="text" name="search" placeholder="Search...">
@@ -434,92 +456,13 @@ require("connect.php");
 
 
 	<!-- Banner -->
-	<div class="sec-banner bg0 p-t-80 p-b-50">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
-					<!-- Block1 -->
-					<div class="block1 wrap-pic-w">
-						<img src="images/banner-01.jpg" alt="IMG-BANNER">
-
-						<a href="product.html" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
-							<div class="block1-txt-child1 flex-col-l">
-								<span class="block1-name ltext-102 trans-04 p-b-8">
-									Women
-								</span>
-
-								<span class="block1-info stext-102 trans-04">
-									Spring 2018
-								</span>
-							</div>
-
-							<div class="block1-txt-child2 p-b-4 trans-05">
-								<div class="block1-link stext-101 cl0 trans-09">
-									Shop Now
-								</div>
-							</div>
-						</a>
-					</div>
-				</div>
-
-				<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
-					<!-- Block1 -->
-					<div class="block1 wrap-pic-w">
-						<img src="images/banner-02.jpg" alt="IMG-BANNER">
-
-						<a href="product.html" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
-							<div class="block1-txt-child1 flex-col-l">
-								<span class="block1-name ltext-102 trans-04 p-b-8">
-									Men
-								</span>
-
-								<span class="block1-info stext-102 trans-04">
-									Spring 2018
-								</span>
-							</div>
-
-							<div class="block1-txt-child2 p-b-4 trans-05">
-								<div class="block1-link stext-101 cl0 trans-09">
-									Shop Now
-								</div>
-							</div>
-						</a>
-					</div>
-				</div>
-
-				<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
-					<!-- Block1 -->
-					<div class="block1 wrap-pic-w">
-						<img src="images/banner-03.jpg" alt="IMG-BANNER">
-
-						<a href="product.html" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
-							<div class="block1-txt-child1 flex-col-l">
-								<span class="block1-name ltext-102 trans-04 p-b-8">
-									Accessories
-								</span>
-
-								<span class="block1-info stext-102 trans-04">
-									New Trend
-								</span>
-							</div>
-
-							<div class="block1-txt-child2 p-b-4 trans-05">
-								<div class="block1-link stext-101 cl0 trans-09">
-									Shop Now
-								</div>
-							</div>
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	
 
 
 	<!-- Product -->
-	<section class="bg0 p-t-23 p-b-140">
+	<section class="bg0 p-t-23 p-b-23">
 		<div class="container">
-			<div class="p-b-10">
+			<div class="p-b-5">
 				<h3 class="ltext-103 cl5">
 					Product Overview
 				</h3>
@@ -768,42 +711,36 @@ require("connect.php");
 			</div>
 
 
-			<div class="container ">
-				<div class="row mx-auto text-center gy-2 gx- bg-light">
-					<div class="col-md-4 col-lg-3 ">
-						<?php
-                        if(isset($_GET['catdetail']))
-                        {
-                        $catid = $_GET['catdetail'];
-                        
-						$product = mysqli_query($con, "select * from product where catID = '$catid'");
-						while ($row = mysqli_fetch_array($product)) {
-						?>
-							<div id="card" class="card my-2" style="width: 18rem;">
-								<img src="admin/productimages/<?php echo $row[4] ?>" class="card-img-top img-fluid" alt="...">
-								<div class="card-body bg-dark">
-									<h5 class="card-title text-light mb-3"> <?php echo $row[1] ?></h5>
-									<p class="card-text text-light text-muted mt-2"> <?php echo $row[3] ?> </p>
-									<p href="" class="text-primary mt-2 fw-bold"> RS. <?php echo $row[2] ?> </p>
-									<a href="product-detail.php?productid=<?php echo $row[0] ?>" class=" btn text-white my-3 bg1 bor1 hov-btn1"> BUY NOW  </a>
-								
-								</div>
-							</div>
-					</div>
-				    <?php }
-                    } ?>
-					
-					
-					<!-- Load more -->
-					<div class="flex-c-m flex-w w-full p-t-45">
-						<a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
-							Load More
-						</a>
-					</div>
-				</div>
-				</div>
 	</section>
+	<section class="p-3 bg-secondary">
 
+		<div class="container">
+			<div class="row text-center">
+				<?php
+				$product = mysqli_query($con, "select * from product where pname like '%$search%'");
+				while ($row = mysqli_fetch_array($product)) {
+				?>
+					<div class="col-md-4 col-lg-3 col-sm-5 mx-auto">
+						<div id="card" class="card my-1 bg-dark" style="width: 15rem;">
+							<img src="admin/productimages/<?php echo $row[4] ?>" class="card-img-top img-fluid " alt="...">
+							<div class="card-body white">
+								<h5 class="card-title text- fw-bold mb-3"> <?php echo $row[1] ?></h5>
+								<p class="card-text  text- mt-2"> <?php echo $row[3] ?> </p>
+								<p href="" class="text-primary mt-2 fw-bold"> RS. <?php echo $row[2] ?> </p>
+								<a href="product-detail.php?productid=<?php echo $row[0] ?>" class=" btn text-white my-3 bg1 bor1 hov-btn1"> BUY NOW  </a>
+							</div>
+						</div>
+					</div>
+				<?php } ?>
+				<div class="flex-c-m flex-w w-full p-t-45">
+					<a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
+						Load More
+					</a>
+				</div>
+			</div>
+		</div>
+
+	</section>
 
 	<!-- Footer -->
 	<footer class="bg3 p-t-75 p-b-32">

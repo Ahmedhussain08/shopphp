@@ -1,6 +1,20 @@
 <?php
 session_start();
+
+if(isset($_GET['remove'])){
+	$remove = $_GET['remove'];
+	foreach($_SESSION['cart'] as $k => $item)
+	{
+		if($remove == $item['id'])
+		{
+			unset($_SESSION['cart'][$k]);
+		}
+	}
+}
+$total=0;
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -113,8 +127,8 @@ session_start();
 							<i class="zmdi zmdi-search"></i>
 						</div>
 
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
-							<i class="zmdi zmdi-shopping-cart"></i>
+						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="<?php if(isset($_SESSION['cart'])) {echo count($_SESSION['cart']);} else{echo 0;} ?>">
+							<a href="shoping-cart.php"><i class="zmdi zmdi-shopping-cart"></i></a>
 						</div>
 
 						<a href="#" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
@@ -346,70 +360,66 @@ session_start();
 						 ?>
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
+				<div class="col-lg-12 col-xl-7 m-lr-auto m-b-50">
 					<div class="m-l-25 m-r--38 m-lr-0-xl">
 						<div class="wrap-table-shopping-cart">
-							<table class="table-shopping-cart">
-								<tr class="table_head">
-									<th class="column-1">Product</th>
-									<th class="column-2">NAME</th>
-									<th class="column-3">Price</th>
-									<th class="column-4">Quantity</th>
-									<th class="column-5">Total</th>
-								</tr>
                                <?php
-							 foreach($_SESSION as $value) {
-								   print_r($value);
-								?>
-								<tr class="table_row">
-								<td class="column-1">
-									<div class="how-itemcart1">
-										<img src="images/item-cart-04.jpg" alt="IMG">
-									</div>
+							   if (empty($_SESSION['cart'])) {
+								echo '<div class=" row my-5 text-center mx-auto d-flex ">
+								<div class="col-md-11 d-flex text-center  mx-auto">
+								 <h1 class="text-center col-md-8  fw-bold">You have no product in cart</h1>
+								 <a class="p-2 text-white col-md-2 fw-bold  bg1 bor1 hov-btn1" href="index.php">Add Product</a>
+								 </div>
+								 </div>';
+							 
+							   }
+							//    print_r($_SESSION['cart']);
+							//    $i = 1;
+							if(isset($_SESSION['cart'])) :?>
+									<form action="" method="POST">
+								 <?php  foreach($_SESSION['cart'] as $key => $value) :?> 
+									<table class="table border border-3 bg-dark text-white text-center " border='1'>
+                     <tr class="table_row bg-dark ">
+                         <thead class="text-center" >
+                             <th class="column-2  text-center">Image</th>
+                             <th class="column-3  text-center "> Product NAME</th>
+                             <th class="column-3  text-center"> Price</th>
+                             <th class="column-1 text-center"> Quantity</th>
+                             <th class="column-2  text-center"> TOTAL</th>
+                             <th class="column-2  text-center"> Action</th>
+                         </thead>
+                     </tr>
+										<tr class="table_row">
+											<td class="column-2  text-center"> <img style="height: 120px;width:120px;" class="img-fluid" src="admin/productimages/<?php echo
+								 $value['image'] ?>" alt=""></td>
+								<td class="column-3  text-center"><?php echo
+								 $value['name'] ?></td>
+								<td class="column-3  text-center">RS. <?php echo
+								 $value['price'] ?></td>
+								 <td class="column-1  text-center">
+									<input value="<?php echo $value['qty']?>" class="w-50 text-center mx-auto" type="number" name="quantity">
 								</td>
-								<td class="column-2"><?php echo
-								 $value[0] ?></td>
-								<td class="column-3"><?php echo
-								 $value[1] ?></td>
-								<td class="column-4">
-									<input class="column-3 mtext-104 cl3 txt-center num-product" type="number" name="qty">
-									
-								</td>
-								<?php  if
-					 (isset($_POST['total'])){
-						 $total = $_POST['total'];
-						 $qty = $_POST['qty'];
-						 $amount =  $value[1] * $qty;
-
-
-									echo
-										'	 <td class="column-5">'. $amount.'</td>';
-						}  ?>
-							</tr>
-							
-							
-						</table>
-						<input class="column-5" name="total" type="submit" value="TOTAL">
-					</div>
+								<td class="column-2 text-center" >RS. <?php echo $value['price']* $value['qty'] ;
+								$price =$value['price']* $value['qty'];
+								$total = $total + $price;
+								?></td>
+								<td class="column-2 text-center"><a href="shoping-cart.php
+								?update=<?php echo
+								$value['id'] ?>" class="  btn btn-primary" name="update" type="submit" value="UPDATE ">Update</a>
+								<a href="shoping-cart.php?remove=<?php echo $value['id'] ?>" class="  btn btn-primary" name="remove" type="submit" value="remove">Remove</a>
+							</td>
+						</tr>	
+					</table>
+						</form>
+						
+							<?php  endforeach ?>
+					<?php 
+					endif	?>
 					
-						<?php } 
-					  ?>
-						<div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
-							<div class="flex-w flex-m m-r-20 m-tb-5">
-								<input class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="coupon" placeholder="Coupon Code">
-									
-								<div class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
-									Apply coupon
-								</div>
-							</div>
+			
 
-							<div class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
-								Update Cart
-							</div>
-						</div>
 					</div>
 				</div>
-
 				<div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
 					<div class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
 						<h4 class="mtext-109 cl2 p-b-30">
@@ -425,56 +435,57 @@ session_start();
 
 							<div class="size-209">
 								<span class="mtext-110 cl2">
-									$79.65
+								RS. 	<?php echo $total; ?>
 								</span>
 							</div>
 						</div>
+			
 
-						<div class="flex-w flex-t bor12 p-t-15 p-b-30">
+						<!-- <div class="flex-w flex-t bor12 p-t-15 p-b-30">
 							<div class="size-208 w-full-ssm">
 								<span class="stext-110 cl2">
 									Shipping:
 								</span>
-							</div>
+							</div> -->
 
-							<div class="size-209 p-r-18 p-r-0-sm w-full-ssm">
-								<p class="stext-111 cl6 p-t-2">
-									There are no shipping methods available. Please double check your address, or contact us if you need any help.
-								</p>
+				
 								
-								<div class="p-t-15">
+								<!-- <div class="p-t-15">
 									<span class="stext-112 cl8">
 										Calculate Shipping
-									</span>
+									</span> -->
 
-									<div class="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9">
+									<!-- <div class="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9">
 										<select class="js-select2" name="time">
 											<option>Select a country...</option>
 											<option>USA</option>
 											<option>UK</option>
-										</select>
-										<div class="dropDownSelect2"></div>
-									</div>
+										</select> -->
+										<!-- <div class="dropDownSelect2"></div>
+									</div> -->
 
-									<div class="bor8 bg0 m-b-12">
+									<!-- <div class="bor8 bg0 m-b-12">
 										<input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="state" placeholder="State /  country">
 									</div>
 
 									<div class="bor8 bg0 m-b-22">
 										<input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="postcode" placeholder="Postcode / Zip">
-									</div>
+									</div> -->
 									
 									<div class="flex-w">
-										<div class="flex-c-m stext-101 cl2 size-115 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer">
+										<!-- <div class="flex-c-m stext-101 cl2 size-115 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer">
 											Update Totals
-										</div>
+										</div> -->
 									</div>
 										
+						<button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+							Proceed to Checkout
+						</button>
 								</div>
 							</div>
 						</div>
 
-						<div class="flex-w flex-t p-t-27 p-b-33">
+						<!-- <div class="flex-w flex-t p-t-27 p-b-33">
 							<div class="size-208">
 								<span class="mtext-101 cl2">
 									Total:
@@ -484,18 +495,15 @@ session_start();
 							<div class="size-209 p-t-1">
 								<span class="mtext-110 cl2">
 									$79.65
-								</span>
+								</span> -->
 							</div>
 						</div>
 
-						<button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
-							Proceed to Checkout
-						</button>
 					</div>
 				</div>
 			</div>
 		</div>
-	</form>
+	<!-- </form> -->
 		
 	
 		

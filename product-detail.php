@@ -2,6 +2,19 @@
 session_start();
 include("connect.php");
 ?>
+<?php
+if(isset($_POST['add_to_cart']))
+{
+    $_SESSION['cart'][] = array(
+		"image"=> $_POST['image'],
+        "id" => $_POST["id"],
+        "name" => $_POST["hiddenname"],
+        "price" => $_POST["hiddenprice"],
+        "qty" => $_POST["qty"]
+	);
+	header("location:shoping-cart.php");
+}
+	?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -131,8 +144,8 @@ include("connect.php");
 							<i class="zmdi zmdi-search"></i>
 						</div>
 
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
-							<i class="zmdi zmdi-shopping-cart"></i>
+						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11  icon-header-noti" data-notify="<?php if(isset($_SESSION['cart'])) {echo count($_SESSION['cart']);} else{echo 0;} ?>">
+							<a href="shoping-cart.php"><i class="zmdi zmdi-shopping-cart"></i></a>
 						</div>
 
 						<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
@@ -365,7 +378,7 @@ include("connect.php");
 	<!-- Product Detail -->
 	<section class="sec-product-detail bg0 p-t-65 p-b-60">
 		<div class="container">
-			<form action="cart.php" method="post">
+			<form action="product-detail.php" method="post">
 
 			<div class="row my-2 p-2">
 				
@@ -377,7 +390,7 @@ include("connect.php");
 					while ($row = mysqli_fetch_array($p)) {
 						?>
 						<div class="col-md-6 col-lg-7 p-b-30 ">
-									<img src="admin/productimages/<?php echo $row[4] ?>" class=" img-fluid h-100" alt="...">
+							<img  name="image" src="admin/productimages/<?php echo $row[4] ?>" class=" img-fluid h-100" alt="...">
 									
 							</div>
 							<div class="col-md-6 col-lg-5 p-b-30">
@@ -419,26 +432,34 @@ include("connect.php");
 
 							 <div class="flex-w flex p-b-10 ">
 								<div class="size-204 flex-w flex-m respon6-next">
-									<div class="wrap-num-product flex-w m-r-2 m-tb-10">
-										<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+									<!-- <div class="wrap-num-product flex-w m-r-2 m-tb-10"> -->
+										<!-- <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
 											<i class="fs-16 zmdi zmdi-minus"></i>
-										</div>
-
-										<input class="mtext-104 cl3 txt-center num-product my-2" type="number" name="num-product" value="1">
+										</div> -->
+						<div class="form-control">
+							Enter Quantity
+						</div>
+						
+						<input value="1" class="form-control" type="number" name="qty" id="">
+                                             
+										<!-- <input class="mtext-104 cl3 txt-center num-product my-2" type="number" name="num-product" value="1">
 
 										<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
 											<i class="fs-16 zmdi zmdi-plus"></i>
-										</div>
-									</div>
+										</div> -->
+									<!-- </div> -->
 
 								 <button name="add_to_cart" class="my-3 flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
 										Add to cart
 									</button>   
 								</div>
+								<input value="<?php echo $row[4] ?>" type="hidden" name="image">
 								<input type="hidden" name="hiddenname" value="<?php echo $row[1] ?>">
                                  <input type="hidden" name="hiddenprice" value="<?php echo $row[2] ?>"> 
 							</div>	
-							<input class="form-control" type="number" name="qty" id="">
+							<input type="hidden" name="id" value="<?php echo
+							$row[0] ?>">
+
 						</div>
 
 						<!--  -->

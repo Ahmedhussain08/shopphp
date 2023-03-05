@@ -11,6 +11,12 @@ if(isset($_GET['remove'])){
 		}
 	}
 }
+if(isset($_POST['empty-cart'])){
+	session_unset();
+	session_destroy();
+
+
+}
 $total=0;
 
 ?>
@@ -45,8 +51,26 @@ $total=0;
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
+<style>
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	#cart-products{
+		display: flex;
+		flex-direction: column;
+	}
+	.color1{
+		color: #717fe0 !important;
+	}
+	#cart{
+		display: flex;
+		flex-direction: column;
+		
+	}
+</style>
 </head>
-<body class="animsition">
+<body class="animation">
 	
 	<!-- Header -->
 	<header class="header-v4">
@@ -92,11 +116,7 @@ $total=0;
 						<ul class="main-menu">
 							<li>
 								<a href="index.php">Home</a>
-								<ul class="sub-menu">
-									<li><a href="index.php">Homepage 1</a></li>
-									<li><a href="home-02.html">Homepage 2</a></li>
-									<li><a href="home-03.html">Homepage 3</a></li>
-								</ul>
+								
 							</li>
 
 							<li>
@@ -152,7 +172,8 @@ $total=0;
 					<i class="zmdi zmdi-search"></i>
 				</div>
 
-				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="2">
+				
+						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="<?php if(isset($_SESSION['cart'])) {echo count($_SESSION['cart']);} else{echo 0;} ?>">
 					<i class="zmdi zmdi-shopping-cart"></i>
 				</div>
 
@@ -203,11 +224,7 @@ $total=0;
 			<ul class="main-menu-m">
 				<li>
 					<a href="index.php">Home</a>
-					<ul class="sub-menu-m">
-						<li><a href="index.php">Homepage 1</a></li>
-						<li><a href="home-02.html">Homepage 2</a></li>
-						<li><a href="home-03.html">Homepage 3</a></li>
-					</ul>
+					
 					<span class="arrow-main-menu-m">
 						<i class="fa fa-angle-right" aria-hidden="true"></i>
 					</span>
@@ -234,7 +251,7 @@ $total=0;
 				</li>
 			</ul>
 		</div>
-
+	
 		<!-- Modal Search -->
 		<div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
 			<div class="container-search-header">
@@ -337,89 +354,70 @@ $total=0;
 		</div>
 	</div>
 
-
-	<!-- breadcrumb -->
-	<div class="container">
-		<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
-			<a href="index.php" class="stext-109 cl8 hov-cl1 trans-04">
-				Home
-				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
-			</a>
-
-			<span class="stext-109 cl4">
-				Shoping Cart
-			</span>
-		</div>
-	</div>
-		
-
-	<!-- Shoping Cart -->
-	<form class="bg0 p-t-75 p-b-85" method="POST">
-	<?php
-					
-						 ?>
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12 col-xl-7 m-lr-auto m-b-50">
-					<div class="m-l-25 m-r--38 m-lr-0-xl">
-						<div class="wrap-table-shopping-cart">
+							<form action="" method="POST">
                                <?php
-							   if (empty($_SESSION['cart'])) {
-								echo '<div class=" row my-5 text-center mx-auto d-flex ">
-								<div class="col-md-11 d-flex text-center  mx-auto">
-								 <h1 class="text-center col-md-8  fw-bold">You have no product in cart</h1>
-								 <a class="p-2 text-white col-md-2 fw-bold  bg1 bor1 hov-btn1" href="index.php">Add Product</a>
-								 </div>
-								 </div>';
-							 
-							   }
+							  
+							   
 							//    print_r($_SESSION['cart']);
 							//    $i = 1;
 							if(isset($_SESSION['cart'])) :?>
-									<form action="" method="POST">
-								 <?php  foreach($_SESSION['cart'] as $key => $value) :?> 
-									<table class="table border border-3 bg-dark text-white text-center " border='1'>
-                     <tr class="table_row bg-dark ">
-                         <thead class="text-center" >
-                             <th class="column-2  text-center">Image</th>
-                             <th class="column-3  text-center "> Product NAME</th>
-                             <th class="column-3  text-center"> Price</th>
-                             <th class="column-1 text-center"> Quantity</th>
-                             <th class="column-2  text-center"> TOTAL</th>
-                             <th class="column-2  text-center"> Action</th>
-                         </thead>
-                     </tr>
-										<tr class="table_row">
-											<td class="column-2  text-center"> <img style="height: 120px;width:120px;" class="img-fluid" src="admin/productimages/<?php echo
-								 $value['image'] ?>" alt=""></td>
-								<td class="column-3  text-center"><?php echo
-								 $value['name'] ?></td>
-								<td class="column-3  text-center">RS. <?php echo
-								 $value['price'] ?></td>
-								 <td class="column-1  text-center">
-									<input value="<?php echo $value['qty']?>" class="w-50 text-center mx-auto" type="number" name="quantity">
-								</td>
-								<td class="column-2 text-center" >RS. <?php echo $value['price']* $value['qty'] ;
-								$price =$value['price']* $value['qty'];
-								$total = $total + $price;
-								?></td>
-								<td class="column-2 text-center"><a href="shoping-cart.php
-								?update=<?php echo
-								$value['id'] ?>" class="  btn btn-primary" name="update" type="submit" value="UPDATE ">Update</a>
-								<a href="shoping-cart.php?remove=<?php echo $value['id'] ?>" class="  btn btn-primary" name="remove" type="submit" value="remove">Remove</a>
-							</td>
-						</tr>	
-					</table>
-						</form>
 						
-							<?php  endforeach ?>
-					<?php 
-					endif	?>
-					
-			
+						<div class="container my-2">
+							<div class="col-md-12 mx-auto border d-flex justify-content-end align-items-center">
+							<button class="fs-27 mx-2 text-danger"  name="empty-cart" type="submit" value="">
+             Remove All <i class="fa fa-trash text-danger fs-30"></i>
+							</button>
+							</div>
 
-					</div>
-				</div>
+  <div class="row align-items-center mx-auto ">
+    <?php foreach($_SESSION['cart'] as $key => $value) :?> 
+      
+      <div class="col-md-2 text-center my-2 border"> 
+        <img style="" class="img-fluid my-2" src="admin/productimages/<?php echo $value['image'] ?>" alt="">
+      </div>
+
+      <div class="col-md-7 "> 
+        <div class="row  border ">
+          <div class="col-md-12 mb-2 ">
+            <h3 class="color1 my-2"><?php echo $value['name'] ?></h3>
+          </div>
+          <div class="col-md-8 mb-2">
+            Price : <h3 class="color1">RS. <?php echo $value['price'] ?></h3>
+          </div>
+          <div class="col-md-8 mb-3">
+            <h3 class="">Quantity : <span class="color1"><?php echo $value['qty'] ?></span> </h3>
+          </div>
+        </div>    
+      </div>
+
+      <div id="cart" class="col-md-3 my-2 border  py-4">
+  <div class="row">
+    <div class="col-md-10  d-flex flex-row justify-content-center align-items-center mb-4">
+      <p class="text-danger mx-2">Remove from cart</p>
+      <a class="fs-30" href="shoping-cart.php?remove=<?php echo $value['id'] ?>" class="" name="remove" type="submit" value="remove">
+        <i class="fa fa-trash text-danger"></i>
+      </a>
+    </div>
+
+    <div class="col-md-9  my-3 mt-md-0 mt-3 text-center d-flex align-items-center ">
+      <p class="mb-0 mx-2">Total</p>
+      <h5 class="color1 mb-0 w-100">
+        RS. <?php echo $value['price']* $value['qty'] ;
+        $price =$value['price']* $value['qty'];
+        $total = $total + $price;
+        ?>
+      </h5>
+    </div>
+  </div>
+</div>
+
+
+<?php endforeach ?>
+<?php endif ?>    
+</div>  
+</div>
+<hr>           
+
 				<div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
 					<div class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
 						<h4 class="mtext-109 cl2 p-b-30">
@@ -432,7 +430,7 @@ $total=0;
 									Subtotal:
 								</span>
 							</div>
-
+							
 							<div class="size-209">
 								<span class="mtext-110 cl2">
 								RS. 	<?php echo $total; ?>
@@ -441,61 +439,29 @@ $total=0;
 						</div>
 			
 
-						<!-- <div class="flex-w flex-t bor12 p-t-15 p-b-30">
-							<div class="size-208 w-full-ssm">
-								<span class="stext-110 cl2">
-									Shipping:
-								</span>
-							</div> -->
-
-				
-								
-								<!-- <div class="p-t-15">
-									<span class="stext-112 cl8">
-										Calculate Shipping
-									</span> -->
-
-									<!-- <div class="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9">
-										<select class="js-select2" name="time">
-											<option>Select a country...</option>
-											<option>USA</option>
-											<option>UK</option>
-										</select> -->
-										<!-- <div class="dropDownSelect2"></div>
-									</div> -->
-
-									<!-- <div class="bor8 bg0 m-b-12">
-										<input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="state" placeholder="State /  country">
-									</div>
-
-									<div class="bor8 bg0 m-b-22">
-										<input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="postcode" placeholder="Postcode / Zip">
-									</div> -->
-									
-									<div class="flex-w">
-										<!-- <div class="flex-c-m stext-101 cl2 size-115 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer">
-											Update Totals
-										</div> -->
-									</div>
-										
-						<button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+						
+						<button name="checkout" type="submit" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
 							Proceed to Checkout
 						</button>
-								</div>
-							</div>
-						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		<?php  if (empty($_SESSION['cart'])) {
+								echo '<div class=" row my-5 text-center mx-auto d-flex ">
+								<div class="col-md-11 d-flex text-center  mx-auto">
+								 <h1 class="text-center col-md-8  fw-bold">You have no product in cart</h1>
+								 <a class="p-2 text-white col-md-2 fw-bold  bg1 bor1 hov-btn1" href="index.php">Add Product</a>
+								 </div>
+								 </div>';
+							    echo '<script>
+								var table =  document.getElementById("table");
+								table.style.display="none";
+							 </script>';
+							   }
+							   ?>
 
-						<!-- <div class="flex-w flex-t p-t-27 p-b-33">
-							<div class="size-208">
-								<span class="mtext-101 cl2">
-									Total:
-								</span>
-							</div>
-
-							<div class="size-209 p-t-1">
-								<span class="mtext-110 cl2">
-									$79.65
-								</span> -->
+						
 							</div>
 						</div>
 
@@ -699,6 +665,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	</script>
 <!--===============================================================================================-->
 	<script src="js/main.js"></script>
-
+	
 </body>
 </html>

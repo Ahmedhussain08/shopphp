@@ -8,9 +8,10 @@ require("connect.php");
 
 <head>
 	<style>
-		.white{
+		.white {
 			background-color: hsl(223, 16%, 91%);
 		}
+
 		#card .card-title,
 		.card-text {
 			display: -webkit-box !important;
@@ -19,13 +20,13 @@ require("connect.php");
 			overflow: hidden;
 		}
 
-		#card  {
+		#card {
 			transition: 0.1s ease-in-out;
 		}
 
-		#card:hover  {
+		#card:hover {
 			transform: scale(1.040);
-			border :2px solid black !important;
+			border: 2px solid black !important;
 			box-shadow: 2px 2px solid black;
 		}
 	</style>
@@ -156,13 +157,44 @@ require("connect.php");
 							<i class="zmdi zmdi-search"></i>
 						</div>
 
-							<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="<?php if(isset($_SESSION['cart'])) {echo count($_SESSION['cart']);} else{echo 0;} ?>">
-							<a href="shoping-cart.php"><i class="zmdi zmdi-shopping-cart"></i></a>
+						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="<?php if (isset($_SESSION['cart'])) {
+																															echo count($_SESSION['cart']);
+																														} else {
+																															echo 0;
+																														} ?>">
+							<a href="shoping-cart.php"><i class="zmdi zmdi-shopping-cart fs-35"></i></a>
 						</div>
 
-						<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
-							<i class="zmdi zmdi-favorite-outline"></i>
-						</a>
+						
+						<?php 
+  if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
+    $sql = mysqli_query($con,"select * from customer where cemail = '{$_SESSION["username"]}' or cname = '{$_SESSION["username"]}'");
+    while($row = mysqli_fetch_array($sql)){
+?>
+    <li class="dropdown dropdown-user">
+      <a class="nav-link dropdown-toggle link" data-toggle="dropdown">
+	  <i class="fa-solid fa-user-check"></i>
+        <span><?php echo $row[1]; ?></span></a>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li class="dropdown-divider"></li>
+          <a class="dropdown-item" href="logout.php"><i class="fa fa-power-off"></i>Logout</a>
+        </ul>
+    </li>
+<?php 
+    }
+  } 
+  else{
+      echo'<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
+	  <a href="login.php" class="dis-block fs-35">
+		  <i class="zmdi zmdi-account-circle"></i>
+
+	  </a>
+  </div>';
+  }
+?>
+
+
+
 					</div>
 				</nav>
 			</div>
@@ -181,13 +213,22 @@ require("connect.php");
 					<i class="zmdi zmdi-search"></i>
 				</div>
 
-				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="2">
+				<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="<?php if (isset($_SESSION['cart'])) {
+																													echo count($_SESSION['cart']);
+																												} else {
+																													echo 0;
+																												} ?>">
 					<i class="zmdi zmdi-shopping-cart"></i>
 				</div>
 
-				<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti" data-notify="0">
-					<i class="zmdi zmdi-favorite-outline"></i>
-				</a>
+
+				<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
+
+					<a href="login.php" class="dis-block ">
+						<i class="zmdi zmdi-account-circle"></i>
+
+					</a>
+				</div>
 			</div>
 
 			<!-- Button show menu -->
@@ -231,11 +272,16 @@ require("connect.php");
 
 			<ul class="main-menu-m">
 				<li>
-					<a href="index.php">Home</a>
+					<a href="index.php">Categories</a>
 					<ul class="sub-menu-m">
-						<li><a href="index.php">Homepage 1</a></li>
-						<li><a href="home-02.html">Homepage 2</a></li>
-						<li><a href="home-03.html">Homepage 3</a></li>
+						<?php $cat = mysqli_query($con, "select * from category");
+						while ($row = mysqli_fetch_array($cat)) {
+						?>
+							<li><a href="catindex.php?catdetail=<?php echo $row[0] ?>"> <?php echo $row[1] ?> </a></li>
+
+
+
+						<?php } ?>
 					</ul>
 					<span class="arrow-main-menu-m">
 						<i class="fa fa-angle-right" aria-hidden="true"></i>
@@ -799,7 +845,7 @@ require("connect.php");
 								<h5 class="card-title text- fw-bold mb-3"> <?php echo $row[1] ?></h5>
 								<p class="card-text  text- mt-2"> <?php echo $row[3] ?> </p>
 								<p href="" class="text-primary mt-2 fw-bold"> RS. <?php echo $row[2] ?> </p>
-								<a href="product-detail.php?productid=<?php echo $row[0] ?>" class=" btn text-white my-3 bg1 bor1 hov-btn1"> BUY NOW  </a>
+								<a href="product-detail.php?productid=<?php echo $row[0] ?>" class=" btn text-white my-3 bg1 bor1 hov-btn1"> BUY NOW </a>
 							</div>
 						</div>
 					</div>
@@ -1125,6 +1171,7 @@ require("connect.php");
 
 	<!--===============================================================================================-->
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="https://kit.fontawesome.com/d5e39b568f.js" crossorigin="anonymous"></script>
 	<!--===============================================================================================-->
 	<script src="vendor/animsition/js/animsition.min.js"></script>
 	<!--===============================================================================================-->

@@ -7,7 +7,7 @@ if(isset($_POST['add_to_cart']))
 {
     $_SESSION['cart'][] = array(
 		"image"=> $_POST['image'],
-        "id" => $_POST["id"],
+        "proid" => $_POST["id"],
         "name" => $_POST["hiddenname"],
         "price" => $_POST["hiddenprice"],
         "qty" => $_POST["qty"]

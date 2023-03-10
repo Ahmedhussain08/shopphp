@@ -1,22 +1,31 @@
 <?php
 session_start();
+include("connect.php");
 
 if(isset($_GET['remove'])){
 	$remove = $_GET['remove'];
 	foreach($_SESSION['cart'] as $k => $item)
 	{
-		if($remove == $item['id'])
+		if($remove == $item['proid'])
 		{
 			unset($_SESSION['cart'][$k]);
 		}
 	}
 }
 if(isset($_POST['empty-cart'])){
-	session_unset();
-	session_destroy();
-
+	unset($_SESSION['cart']);
 
 }
+if(isset($_POST['checkout'])){
+	if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
+		header("location:checkout.php");
+	}
+	
+	else{
+		header("location:login.php");
+	}
+}
+
 $total=0;
 
 ?>
@@ -150,10 +159,32 @@ $total=0;
 						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="<?php if(isset($_SESSION['cart'])) {echo count($_SESSION['cart']);} else{echo 0;} ?>">
 							<a href="shoping-cart.php"><i class="zmdi zmdi-shopping-cart"></i></a>
 						</div>
+<?php
+						if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
+    $sql = mysqli_query($con,"select * from customer where cemail = '{$_SESSION["username"]}' or cname = '{$_SESSION["username"]}'");
+    while($row = mysqli_fetch_array($sql)){
+?>
+    <li class="dropdown dropdown-user">
+      <a class="nav-link dropdown-toggle link" data-toggle="dropdown">
+	  <i class="fa-solid fa-user-check"></i>
+        <span><?php echo $row[1]; ?></span></a>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li class="dropdown-divider"></li>
+          <a class="dropdown-item" href="logout.php"><i class="fa fa-power-off"></i>Logout</a>
+        </ul>
+    </li>
+<?php 
+    }
+  } 
+  else{
+      echo'<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
+	  <a href="login.php" class="dis-block fs-35">
+		  <i class="zmdi zmdi-account-circle"></i>
 
-						<a href="#" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
-							<i class="zmdi zmdi-favorite-outline"></i>
-						</a>
+	  </a>
+  </div>';
+  }
+?>
 					</div>
 				</nav>
 			</div>	
@@ -176,10 +207,32 @@ $total=0;
 						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="<?php if(isset($_SESSION['cart'])) {echo count($_SESSION['cart']);} else{echo 0;} ?>">
 					<i class="zmdi zmdi-shopping-cart"></i>
 				</div>
+       <?php
+				if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
+    $sql = mysqli_query($con,"select * from customer where cemail = '{$_SESSION["username"]}' or cname = '{$_SESSION["username"]}'");
+    while($row = mysqli_fetch_array($sql)){
+?>
+    <li class="dropdown dropdown-user">
+      <a class="nav-link dropdown-toggle link" data-toggle="dropdown">
+	  <i class="fa-solid fa-user-check"></i>
+        <span><?php echo $row[1]; ?></span></a>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li class="dropdown-divider"></li>
+          <a class="dropdown-item" href="logout.php"><i class="fa fa-power-off"></i>Logout</a>
+        </ul>
+    </li>
+<?php 
+    }
+  } 
+  else{
+      echo'<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
+	  <a href="login.php" class="dis-block fs-35">
+		  <i class="zmdi zmdi-account-circle"></i>
 
-				<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti" data-notify="0">
-					<i class="zmdi zmdi-favorite-outline"></i>
-				</a>
+	  </a>
+  </div>';
+  }
+?>
 			</div>
 
 			<!-- Button show menu -->
@@ -394,7 +447,7 @@ $total=0;
   <div class="row">
     <div class="col-md-10  d-flex flex-row justify-content-center align-items-center mb-4">
       <p class="text-danger mx-2">Remove from cart</p>
-      <a class="fs-30" href="shoping-cart.php?remove=<?php echo $value['id'] ?>" class="" name="remove" type="submit" value="remove">
+      <a class="fs-30" href="shoping-cart.php?remove=<?php echo $value['proid'] ?>" class="" name="remove" type="submit" value="remove">
         <i class="fa fa-trash text-danger"></i>
       </a>
     </div>
@@ -408,17 +461,12 @@ $total=0;
         ?>
       </h5>
     </div>
+	<input value="<?php echo $value['proid'] ?>" type="hidden" name="">
   </div>
 </div>
 
-
-<?php endforeach ?>
-<?php endif ?>    
-</div>  
-</div>
-<hr>           
-
-				<div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
+<hr>
+<div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
 					<div class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
 						<h4 class="mtext-109 cl2 p-b-30">
 							Cart Totals
@@ -432,17 +480,26 @@ $total=0;
 							</div>
 							
 							<div class="size-209">
-								<span class="mtext-110 cl2">
+								<span value="<?php echo $total ?>" class="mtext-110 cl2">
 								RS. 	<?php echo $total; ?>
 								</span>
 							</div>
 						</div>
+						<button  name="checkout" type="submit" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+							Proceed to Checkout
+						</button>
+
+<?php endforeach ?>
+<?php endif ?>    
+</div>  
+</div>
+<hr>           
+
+			
 			
 
 						
-						<button name="checkout" type="submit" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
-							Proceed to Checkout
-						</button>
+						
 					</div>
 				</div>
 			</div>

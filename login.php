@@ -15,7 +15,7 @@ if(isset($_POST['login'])){
         $_SESSION["loggedin"] = true;
         $_SESSION["username"] = $username;
         // echo '<script>swal("Good job!", "Data Save Done", "success");</script>';
-        header("location:index.php");
+        header("location:shoping-cart.php");
         exit;
     } if($num==0) {
         $error=true;

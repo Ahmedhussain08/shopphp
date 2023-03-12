@@ -1,465 +1,644 @@
+<?php 
+include("connect.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width initial-scale=1.0">
-    <title>Admincast bootstrap 4 &amp; angular 5 admin template, Шаблон админки | Dashboard</title>
-    <!-- GLOBAL MAINLY STYLES-->
-    <link href="./assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="./assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="./assets/vendors/themify-icons/css/themify-icons.css" rel="stylesheet" />
-    <!-- PLUGINS STYLES-->
-    <link href="./assets/vendors/jvectormap/jquery-jvectormap-2.0.3.css" rel="stylesheet" />
-    <!-- THEME STYLES-->
-    <link href="assets/css/main.min.css" rel="stylesheet" />
-    <!-- PAGE LEVEL STYLES-->
-</head>
-
-<body class="fixed-navbar">
-    <div class="page-wrapper">
-        <!-- START HEADER-->
-        <header class="header">
-            <div class="page-brand">
-                <a class="link" href="index.php">
-                    <span class="brand">Admin
-                        <span class="brand-tip">CAST</span>
-                    </span>
-                    <span class="brand-mini">AC</span>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Corona Admin</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="assets/vendors/jvectormap/jquery-jvectormap.css">
+    <link rel="stylesheet" href="assets/vendors/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="assets/vendors/owl-carousel-2/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/vendors/owl-carousel-2/owl.theme.default.min.css">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="assets/images/favicon.png" />
+  </head>
+  <body>
+    <div class="container-scroller">
+      <!-- partial:partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
+          <a class="sidebar-brand brand-logo" href="index.html"><img src="assets/images/logo.svg" alt="logo" /></a>
+          <a class="sidebar-brand brand-logo-mini" href="index.html"><img src="assets/images/logo-mini.svg" alt="logo" /></a>
+        </div>
+        <ul class="nav">
+          <li class="nav-item profile">
+            <div class="profile-desc">
+              <div class="profile-pic">
+                <div class="count-indicator">
+                  <img class="img-xs rounded-circle " src="assets/images/faces/face15.jpg" alt="">
+                  <span class="count bg-success"></span>
+                </div>
+                <div class="profile-name">
+                  <h5 class="mb-0 font-weight-normal">Henry Klein</h5>
+                  <span>Gold Member</span>
+                </div>
+              </div>
+              <a href="#" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
+              <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list" aria-labelledby="profile-dropdown">
+                <a href="#" class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-dark rounded-circle">
+                      <i class="mdi mdi-settings text-primary"></i>
+                    </div>
+                  </div>
+                  <div class="preview-item-content">
+                    <p class="preview-subject ellipsis mb-1 text-small">Account settings</p>
+                  </div>
                 </a>
-            </div>
-            <div class="flexbox flex-1">
-                <!-- START TOP-LEFT TOOLBAR-->
-                <ul class="nav navbar-toolbar">
-                    <li>
-                        <a class="nav-link sidebar-toggler js-sidebar-toggler"><i class="ti-menu"></i></a>
-                    </li>
-                    <li>
-                        <form class="navbar-search" action="javascript:;">
-                            <div class="rel">
-                                <span class="search-icon"><i class="ti-search"></i></span>
-                                <input class="form-control" placeholder="Search here...">
-                            </div>
-                        </form>
-                    </li>
-                </ul>
-                <!-- END TOP-LEFT TOOLBAR-->
-                <!-- START TOP-RIGHT TOOLBAR-->
-                <ul class="nav navbar-toolbar">
-                    <li class="dropdown dropdown-inbox">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope-o"></i>
-                            <span class="badge badge-primary envelope-badge">9</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-right dropdown-menu-media">
-                            <li class="dropdown-menu-header">
-                                <div>
-                                    <span><strong>9 New</strong> Messages</span>
-                                    <a class="pull-right" href="mailbox.html">view all</a>
-                                </div>
-                            </li>
-                            <li class="list-group list-group-divider scroller" data-height="240px" data-color="#71808f">
-                                <div>
-                                    <a class="list-group-item">
-                                        <div class="media">
-                                            <div class="media-img">
-                                                <img src="./assets/img/users/u1.jpg" />
-                                            </div>
-                                            <div class="media-body">
-                                                <div class="font-strong"> </div>Jeanne Gonzalez<small class="text-muted float-right">Just now</small>
-                                                <div class="font-13">Your proposal interested me.</div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a class="list-group-item">
-                                        <div class="media">
-                                            <div class="media-img">
-                                                <img src="./assets/img/users/u2.jpg" />
-                                            </div>
-                                            <div class="media-body">
-                                                <div class="font-strong"></div>Becky Brooks<small class="text-muted float-right">18 mins</small>
-                                                <div class="font-13">Lorem Ipsum is simply.</div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a class="list-group-item">
-                                        <div class="media">
-                                            <div class="media-img">
-                                                <img src="./assets/img/users/u3.jpg" />
-                                            </div>
-                                            <div class="media-body">
-                                                <div class="font-strong"></div>Frank Cruz<small class="text-muted float-right">18 mins</small>
-                                                <div class="font-13">Lorem Ipsum is simply.</div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a class="list-group-item">
-                                        <div class="media">
-                                            <div class="media-img">
-                                                <img src="./assets/img/users/u4.jpg" />
-                                            </div>
-                                            <div class="media-body">
-                                                <div class="font-strong"></div>Rose Pearson<small class="text-muted float-right">3 hrs</small>
-                                                <div class="font-13">Lorem Ipsum is simply.</div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-</li>
-                        </ul>
-                    </li>
-                    <li class="dropdown dropdown-notification">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell-o rel"><span class="notify-signal"></span></i></a>
-                        <ul class="dropdown-menu dropdown-menu-right dropdown-menu-media">
-                            <li class="dropdown-menu-header">
-                                <div>
-                                    <span><strong>5 New</strong> Notifications</span>
-                                    <a class="pull-right" href="javascript:;">view all</a>
-                                </div>
-                            </li>
-                            <li class="list-group list-group-divider scroller" data-height="240px" data-color="#71808f">
-                                <div>
-                                    <a class="list-group-item">
-                                        <div class="media">
-                                            <div class="media-img">
-                                                <span class="badge badge-success badge-big"><i class="fa fa-check"></i></span>
-                                            </div>
-                                            <div class="media-body">
-                                                <div class="font-13">4 task compiled</div><small class="text-muted">22 mins</small></div>
-                                        </div>
-                                    </a>
-                                    <a class="list-group-item">
-                                        <div class="media">
-                                            <div class="media-img">
-                                                <span class="badge badge-default badge-big"><i class="fa fa-shopping-basket"></i></span>
-                                            </div>
-                                            <div class="media-body">
-                                                <div class="font-13">You have 12 new orders</div><small class="text-muted">40 mins</small></div>
-                                        </div>
-                                    </a>
-                                    <a class="list-group-item">
-                                        <div class="media">
-                                            <div class="media-img">
-                                                <span class="badge badge-danger badge-big"><i class="fa fa-bolt"></i></span>
-                                            </div>
-                                            <div class="media-body">
-                                                <div class="font-13">Server #7 rebooted</div><small class="text-muted">2 hrs</small></div>
-                                        </div>
-                                    </a>
-                                    <a class="list-group-item">
-                                        <div class="media">
-                                            <div class="media-img">
-                                                <span class="badge badge-success badge-big"><i class="fa fa-user"></i></span>
-                                            </div>
-                                            <div class="media-body">
-                                                <div class="font-13">New user registered</div><small class="text-muted">2 hrs</small></div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown dropdown-user">
-                        <a class="nav-link dropdown-toggle link" data-toggle="dropdown">
-                            <img src="./assets/img/admin-avatar.png" />
-                            <span></span>Admin<i class="fa fa-angle-down m-l-5"></i></a>
-                        <ul class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="profile.html"><i class="fa fa-user"></i>Profile</a>
-                            <a class="dropdown-item" href="profile.html"><i class="fa fa-cog"></i>Settings</a>
-                            <a class="dropdown-item" href="javascript:;"><i class="fa fa-support"></i>Support</a>
-                            <li class="dropdown-divider"></li>
-                            <a class="dropdown-item" href="login.html"><i class="fa fa-power-off"></i>Logout</a>
-                        </ul>
-                    </li>
-                </ul>
-                <!-- END TOP-RIGHT TOOLBAR-->
-            </div>
-        </header>
-        <!-- END HEADER-->
-        <!-- START SIDEBAR-->
-        <nav class="page-sidebar" id="sidebar">
-            <div id="sidebar-collapse">
-                <div class="admin-block d-flex">
-                    <div>
-                        <img src="./assets/img/admin-avatar.png" width="45px" />
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-dark rounded-circle">
+                      <i class="mdi mdi-onepassword  text-info"></i>
                     </div>
-                    <div class="admin-info">
-                        <div class="font-strong">James Brown</div><small>Administrator</small></div>
-                </div>
-                <ul class="side-menu metismenu">
-                    <li>
-                        <a class="active" href="index.php"><i class="sidebar-item-icon fa fa-th-large"></i>
-                            <span class="nav-label">Dashboard</span>
-                        </a>
-                    </li>
-                    <li class="heading">FEATURES</li>
-                    <li>
-                        <a href="javascript:;"><i class="sidebar-item-icon fa fa-bookmark"></i>
-                            <span class="nav-label">category</span><i class="fa fa-angle-left arrow"></i></a>
-                        <ul class="nav-2-level collapse">
-                            <li>
-                                <a href="index.php?addcat">add category</a>
-                            </li>
-                            <li>
-                                <a href="index.php?viewcat">View category</a>
-                            </li>
-                           
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;"><i class="sidebar-item-icon fa fa-bookmark"></i>
-                            <span class="nav-label">Brand</span><i class="fa fa-angle-left arrow"></i></a>
-                        <ul class="nav-2-level collapse">
-                            <li>
-                                <a href="index.php?addbrand">add Brand</a>
-                            </li>
-                            <li>
-                                <a href="index.php?viewbrand">View Brand</a>
-                            </li>
-                           
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;"><i class="sidebar-item-icon fa fa-bookmark"></i>
-                            <span class="nav-label">Product</span><i class="fa fa-angle-left arrow"></i></a>
-                        <ul class="nav-2-level collapse">
-                            <li>
-                                <a href="index.php?addproduct">add Product</a>
-                            </li>
-                            <li>
-                                <a href="index.php?viewbrand">View Product</a>
-                            </li>
-                           
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        
-        <!-- END SIDEBAR-->
-        <div class="content-wrapper">
-            <!-- START PAGE CONTENT-->
-            <div class="page-content fade-in-up">
-                <div class="row mx-auto">
-               <?php
-                if(isset($_GET['addcat'])){
-                    include("addcat.php");
-                }
-                elseif(isset($_GET['viewcat'])){
-                    include("viewcat.php");
-                }
-                elseif(isset($_GET['addbrand'])){
-                    include("addbrand.php");
-                }
-                elseif(isset($_GET['viewbrand'])){
-                    include("viewbrand.php");
-                }
-                elseif(isset($_GET['addproduct'])){
-                    include("addproduct.php");
-                }
-                else{
-                    echo '<div class="col-lg-3 col-md-6">
-                    <div class="ibox bg-success color-white widget-stat">
-                        <div class="ibox-body">
-                            <h2 class="m-b-5 font-strong">201</h2>
-                            <div class="m-b-5">NEW ORDERS</div><i class="ti-shopping-cart widget-stat-icon"></i>
-                            <div><i class="fa fa-level-up m-r-5"></i><small>25% higher</small></div>
-                        </div>
+                  </div>
+                  <div class="preview-item-content">
+                    <p class="preview-subject ellipsis mb-1 text-small">Change Password</p>
+                  </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-dark rounded-circle">
+                      <i class="mdi mdi-calendar-today text-success"></i>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="ibox bg-info color-white widget-stat">
-                        <div class="ibox-body">
-                            <h2 class="m-b-5 font-strong">1250</h2>
-                            <div class="m-b-5">UNIQUE VIEWS</div><i class="ti-bar-chart widget-stat-icon"></i>
-                            <div><i class="fa fa-level-up m-r-5"></i><small>17% higher</small></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="ibox bg-warning color-white widget-stat">
-                        <div class="ibox-body">
-                            <h2 class="m-b-5 font-strong">$1570</h2>
-                            <div class="m-b-5">TOTAL INCOME</div><i class="fa fa-money widget-stat-icon"></i>
-                            <div><i class="fa fa-level-up m-r-5"></i><small>22% higher</small></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="ibox bg-danger color-white widget-stat">
-                        <div class="ibox-body">
-                            <h2 class="m-b-5 font-strong">108</h2>
-                            <div class="m-b-5">NEW USERS</div><i class="ti-user widget-stat-icon"></i>
-                            <div><i class="fa fa-level-down m-r-5"></i><small>-12% Lower</small></div>
-                        </div>
-                    </div>
-                </div>' ;
-                }
-                ?>
-                    
-                </div>
-               
-                                           
-                    
-            <!-- END PAGE CONTENT-->
-            <footer class="page-footer">
-                <div class="font-13">2018 © <b>AdminCAST</b> - All rights reserved.</div>
-                <a class="px-4" href="http://themeforest.net/item/adminca-responsive-bootstrap-4-3-angular-4-admin-dashboard-template/20912589" target="_blank">BUY PREMIUM</a>
-                <div class="to-top"><i class="fa fa-angle-double-up"></i></div>
-            </footer>
-        </div>
-    </div>
-    <!-- BEGIN THEME CONFIG PANEL-->
-    <div class="theme-config">
-        <div class="theme-config-toggle"><i class="fa fa-cog theme-config-show"></i><i class="ti-close theme-config-close"></i></div>
-        <div class="theme-config-box">
-            <div class="text-center font-18 m-b-20">SETTINGS</div>
-            <div class="font-strong">LAYOUT OPTIONS</div>
-            <div class="check-list m-b-20 m-t-10">
-                <label class="ui-checkbox ui-checkbox-gray">
-                    <input id="_fixedNavbar" type="checkbox" checked>
-                    <span class="input-span"></span>Fixed navbar</label>
-                <label class="ui-checkbox ui-checkbox-gray">
-                    <input id="_fixedlayout" type="checkbox">
-                    <span class="input-span"></span>Fixed layout</label>
-                <label class="ui-checkbox ui-checkbox-gray">
-                    <input class="js-sidebar-toggler" type="checkbox">
-                    <span class="input-span"></span>Collapse sidebar</label>
+                  </div>
+                  <div class="preview-item-content">
+                    <p class="preview-subject ellipsis mb-1 text-small">To-do list</p>
+                  </div>
+                </a>
+              </div>
             </div>
-            <div class="font-strong">LAYOUT STYLE</div>
-            <div class="m-t-10">
-                <label class="ui-radio ui-radio-gray m-r-10">
-                    <input type="radio" name="layout-style" value="" checked="">
-                    <span class="input-span"></span>Fluid</label>
-                <label class="ui-radio ui-radio-gray">
-                    <input type="radio" name="layout-style" value="1">
-                    <span class="input-span"></span>Boxed</label>
+          </li>
+          <li class="nav-item nav-category">
+            <span class="nav-link">Navigation</span>
+          </li>
+          <li class="nav-item menu-items">
+            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+              <span class="menu-icon">
+                <i class="mdi mdi-laptop"></i>
+              </span>
+              <span class="menu-title">Categories</span>
+              <i class="menu-arrow text-primary"></i>
+            </a>
+            <div class="collapse" id="ui-basic">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="index.php?viewcat">View Category</a></li>
+                <li class="nav-item"> <a class="nav-link" href="index.php?addcat">Add Category</a></li>
+              </ul>
             </div>
-            <div class="m-t-10 m-b-10 font-strong">THEME COLORS</div>
-            <div class="d-flex m-b-20">
-                <div class="color-skin-box" data-toggle="tooltip" data-original-title="Default">
-                    <label>
-                        <input type="radio" name="setting-theme" value="default" checked="">
-                        <span class="color-check-icon"><i class="fa fa-check"></i></span>
-                        <div class="color bg-white"></div>
-                        <div class="color-small bg-ebony"></div>
-                    </label>
-                </div>
-                <div class="color-skin-box" data-toggle="tooltip" data-original-title="Blue">
-                    <label>
-                        <input type="radio" name="setting-theme" value="blue">
-                        <span class="color-check-icon"><i class="fa fa-check"></i></span>
-                        <div class="color bg-blue"></div>
-                        <div class="color-small bg-ebony"></div>
-                    </label>
-                </div>
-                <div class="color-skin-box" data-toggle="tooltip" data-original-title="Green">
-                    <label>
-                        <input type="radio" name="setting-theme" value="green">
-                        <span class="color-check-icon"><i class="fa fa-check"></i></span>
-                        <div class="color bg-green"></div>
-                        <div class="color-small bg-ebony"></div>
-                    </label>
-                </div>
-                <div class="color-skin-box" data-toggle="tooltip" data-original-title="Purple">
-                    <label>
-                        <input type="radio" name="setting-theme" value="purple">
-                        <span class="color-check-icon"><i class="fa fa-check"></i></span>
-                        <div class="color bg-purple"></div>
-                        <div class="color-small bg-ebony"></div>
-                    </label>
-                </div>
-                <div class="color-skin-box" data-toggle="tooltip" data-original-title="Orange">
-                    <label>
-                        <input type="radio" name="setting-theme" value="orange">
-                        <span class="color-check-icon"><i class="fa fa-check"></i></span>
-                        <div class="color bg-orange"></div>
-                        <div class="color-small bg-ebony"></div>
-                    </label>
-                </div>
-                <div class="color-skin-box" data-toggle="tooltip" data-original-title="Pink">
-                    <label>
-                        <input type="radio" name="setting-theme" value="pink">
-                        <span class="color-check-icon"><i class="fa fa-check"></i></span>
-                        <div class="color bg-pink"></div>
-                        <div class="color-small bg-ebony"></div>
-                    </label>
-                </div>
+          </li>
+          <li class="nav-item menu-items">
+            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+              <span class="menu-icon">
+                <i class="mdi mdi-laptop"></i>
+              </span>
+              <span class="menu-title">Products</span>
+              <i class="menu-arrow text-primary"></i>
+            </a>
+            <div class="collapse" id="ui-basic">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="index.php?addproduct">Add Product </a></li>
+                <li class="nav-item"> <a class="nav-link" href="index.php?viewproduct">View Products </a></li>
+              </ul>
             </div>
-            <div class="d-flex">
-                <div class="color-skin-box" data-toggle="tooltip" data-original-title="White">
-                    <label>
-                        <input type="radio" name="setting-theme" value="white">
-                        <span class="color-check-icon"><i class="fa fa-check"></i></span>
-                        <div class="color"></div>
-                        <div class="color-small bg-silver-100"></div>
-                    </label>
-                </div>
-                <div class="color-skin-box" data-toggle="tooltip" data-original-title="Blue light">
-                    <label>
-                        <input type="radio" name="setting-theme" value="blue-light">
-                        <span class="color-check-icon"><i class="fa fa-check"></i></span>
-                        <div class="color bg-blue"></div>
-                        <div class="color-small bg-silver-100"></div>
-                    </label>
-                </div>
-                <div class="color-skin-box" data-toggle="tooltip" data-original-title="Green light">
-                    <label>
-                        <input type="radio" name="setting-theme" value="green-light">
-                        <span class="color-check-icon"><i class="fa fa-check"></i></span>
-                        <div class="color bg-green"></div>
-                        <div class="color-small bg-silver-100"></div>
-                    </label>
-                </div>
-                <div class="color-skin-box" data-toggle="tooltip" data-original-title="Purple light">
-                    <label>
-                        <input type="radio" name="setting-theme" value="purple-light">
-                        <span class="color-check-icon"><i class="fa fa-check"></i></span>
-                        <div class="color bg-purple"></div>
-                        <div class="color-small bg-silver-100"></div>
-                    </label>
-                </div>
-                <div class="color-skin-box" data-toggle="tooltip" data-original-title="Orange light">
-                    <label>
-                        <input type="radio" name="setting-theme" value="orange-light">
-                        <span class="color-check-icon"><i class="fa fa-check"></i></span>
-                        <div class="color bg-orange"></div>
-                        <div class="color-small bg-silver-100"></div>
-                    </label>
-                </div>
-                <div class="color-skin-box" data-toggle="tooltip" data-original-title="Pink light">
-                    <label>
-                        <input type="radio" name="setting-theme" value="pink-light">
-                        <span class="color-check-icon"><i class="fa fa-check"></i></span>
-                        <div class="color bg-pink"></div>
-                        <div class="color-small bg-silver-100"></div>
-                    </label>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- END THEME CONFIG PANEL-->
-    <!-- BEGIN PAGA BACKDROPS-->
-    <div class="sidenav-backdrop backdrop"></div>
-    <div class="preloader-backdrop">
-        <div class="page-preloader">Loading</div>
-    </div>
-    <!-- END PAGA BACKDROPS-->
-    <!-- CORE PLUGINS-->
-    <script src="./assets/vendors/jquery/dist/jquery.min.js" type="text/javascript"></script>
-    <script src="./assets/vendors/popper.js/dist/umd/popper.min.js" type="text/javascript"></script>
-    <script src="./assets/vendors/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="./assets/vendors/metisMenu/dist/metisMenu.min.js" type="text/javascript"></script>
-    <script src="./assets/vendors/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-    <!-- PAGE LEVEL PLUGINS-->
-    <script src="./assets/vendors/chart.js/dist/Chart.min.js" type="text/javascript"></script>
-    <script src="./assets/vendors/jvectormap/jquery-jvectormap-2.0.3.min.js" type="text/javascript"></script>
-    <script src="./assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js" type="text/javascript"></script>
-    <script src="./assets/vendors/jvectormap/jquery-jvectormap-us-aea-en.js" type="text/javascript"></script>
-    <!-- CORE SCRIPTS-->
-    <script src="assets/js/app.min.js" type="text/javascript"></script>
-    <!-- PAGE LEVEL SCRIPTS-->
-    <script src="./assets/js/scripts/dashboard_1_demo.js" type="text/javascript"></script>
-</body>
+          </li>
 
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="pages/forms/basic_elements.html">
+              <span class="menu-icon">
+                <i class="mdi mdi-playlist-play"></i>
+              </span>
+              <span class="menu-title">Form Elements</span>
+            </a>
+          </li>
+         
+         
+        
+          <li class="nav-item menu-items">
+            <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+              <span class="menu-icon">
+                <i class="mdi mdi-security"></i>
+              </span>
+              <span class="menu-title">User Pages</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="auth">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html"> Blank Page </a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> 404 </a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"> 500 </a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Login </a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="http://www.bootstrapdash.com/demo/corona-free/jquery/documentation/documentation.html">
+              <span class="menu-icon">
+                <i class="mdi mdi-file-document-box"></i>
+              </span>
+              <span class="menu-title">Documentation</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_navbar.html -->
+        <nav class="navbar p-0 fixed-top d-flex flex-row">
+          <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
+            <a class="navbar-brand brand-logo-mini" href="index.html"><img src="assets/images/logo-mini.svg" alt="logo" /></a>
+          </div>
+          <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
+            <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+              <span class="mdi mdi-menu"></span>
+            </button>
+            <ul class="navbar-nav w-100">
+              <li class="nav-item w-100">
+                <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
+                  <input type="text" class="form-control" placeholder="Search products">
+                </form>
+              </li>
+            </ul>
+            <ul class="navbar-nav navbar-nav-right">
+            
+              <li class="nav-item nav-settings d-none d-lg-block">
+                <a class="nav-link" href="#">
+                  <i class="mdi mdi-view-grid"></i>
+                </a>
+              </li>
+              <li class="nav-item dropdown border-left">
+                <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                  <i class="mdi mdi-email"></i>
+                  <span class="count bg-success"></span>
+                </a>
+              
+              </li>
+              <li class="nav-item dropdown border-left">
+                <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
+                  <i class="mdi mdi-bell"></i>
+                  <span class="count bg-danger"></span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+                  <h6 class="p-3 mb-0">Notifications</h6>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-calendar text-success"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject mb-1">Event today</p>
+                      <p class="text-muted ellipsis mb-0"> Just a reminder that you have an event today </p>
+                    </div>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-settings text-danger"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject mb-1">Settings</p>
+                      <p class="text-muted ellipsis mb-0"> Update dashboard </p>
+                    </div>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-link-variant text-warning"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject mb-1">Launch Admin</p>
+                      <p class="text-muted ellipsis mb-0"> New admin wow! </p>
+                    </div>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <p class="p-3 mb-0 text-center">See all notifications</p>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
+                  <div class="navbar-profile">
+                    <img class="img-xs rounded-circle" src="assets/images/faces/face15.jpg" alt="">
+                    <p class="mb-0 d-none d-sm-block navbar-profile-name">Admin</p>
+                    <i class="mdi mdi-menu-down d-none d-sm-block"></i>
+                  </div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
+                  <h6 class="p-3 mb-0">Profile</h6>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item preview-item">
+                    
+                   
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-logout text-danger"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject mb-1">Log out</p>
+                    </div>
+                  </a>
+                 
+              </li>
+            </ul>
+            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+              <span class="mdi mdi-format-line-spacing"></span>
+            </button>
+          </div>
+        </nav>
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+           
+          <?php 
+          if(isset($_GET['viewcat'])){
+            include("viewcat.php");
+          }
+          elseif(isset($_GET['addcat'])){
+            include("addcat.php");
+          }
+          elseif(isset($_GET['addproduct'])){
+            include("addproduct.php");
+        }
+          elseif(isset($_GET['viewproduct'])){
+            include("viewproduct.php");
+        }
+          else{
+            echo ' <div class="row mt-4">
+            <div class="col-xl-3 col-sm-6 grid-margin stretch-card mt-4">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-9">
+                      <div class="d-flex align-items-center align-self-start">
+                        <h3 class="mb-0">$12.34</h3>
+                        <p class="text-success ml-2 mb-0 font-weight-medium">+3.5%</p>
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <div class="icon icon-box-success ">
+                        <span class="mdi mdi-arrow-top-right icon-item"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <h6 class="text-muted font-weight-normal">Potential growth</h6>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-9">
+                      <div class="d-flex align-items-center align-self-start">
+                        <h3 class="mb-0">$17.34</h3>
+                        <p class="text-success ml-2 mb-0 font-weight-medium">+11%</p>
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <div class="icon icon-box-success">
+                        <span class="mdi mdi-arrow-top-right icon-item"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <h6 class="text-muted font-weight-normal">Revenue current</h6>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-9">
+                      <div class="d-flex align-items-center align-self-start">
+                        <h3 class="mb-0">$12.34</h3>
+                        <p class="text-danger ml-2 mb-0 font-weight-medium">-2.4%</p>
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <div class="icon icon-box-danger">
+                        <span class="mdi mdi-arrow-bottom-left icon-item"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <h6 class="text-muted font-weight-normal">Daily Income</h6>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-9">
+                      <div class="d-flex align-items-center align-self-start">
+                        <h3 class="mb-0">$31.53</h3>
+                        <p class="text-success ml-2 mb-0 font-weight-medium">+3.5%</p>
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <div class="icon icon-box-success ">
+                        <span class="mdi mdi-arrow-top-right icon-item"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <h6 class="text-muted font-weight-normal">Expense current</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row text-center">
+            <div class="col-md-8 grid-margin stretch-card mx-auto">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Transaction History</h4>
+                  <canvas id="transaction-history" class="transaction-chart"></canvas>
+                  <div class="bg-gray-dark d-flex d-md-block d-xl-flex flex-row py-3 px-4 px-md-3 px-xl-4 rounded mt-3">
+                    <div class="text-md-center text-xl-left">
+                      <h6 class="mb-1">Transfer to Paypal</h6>
+                      <p class="text-muted mb-0">07 Jan 2019, 09:12AM</p>
+                    </div>
+                    <div class="align-self-center flex-grow text-right text-md-center text-xl-right py-md-2 py-xl-0">
+                      <h6 class="font-weight-bold mb-0">$236</h6>
+                    </div>
+                  </div>
+                  <div class="bg-gray-dark d-flex d-md-block d-xl-flex flex-row py-3 px-4 px-md-3 px-xl-4 rounded mt-3">
+                    <div class="text-md-center text-xl-left">
+                      <h6 class="mb-1">Tranfer to Stripe</h6>
+                      <p class="text-muted mb-0">07 Jan 2019, 09:12AM</p>
+                    </div>
+                    <div class="align-self-center flex-grow text-right text-md-center text-xl-right py-md-2 py-xl-0">
+                      <h6 class="font-weight-bold mb-0">$593</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+           
+          </div>
+          <div class="row">
+            <div class="col-sm-4 grid-margin">
+              <div class="card">
+                <div class="card-body">
+                  <h5>Revenue</h5>
+                  <div class="row">
+                    <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                      <div class="d-flex d-sm-block d-md-flex align-items-center">
+                        <h2 class="mb-0">$32123</h2>
+                        <p class="text-success ml-2 mb-0 font-weight-medium">+3.5%</p>
+                      </div>
+                      <h6 class="text-muted font-weight-normal">11.38% Since last month</h6>
+                    </div>
+                    <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                      <i class="icon-lg mdi mdi-codepen text-primary ml-auto"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4 grid-margin">
+              <div class="card">
+                <div class="card-body">
+                  <h5>Sales</h5>
+                  <div class="row">
+                    <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                      <div class="d-flex d-sm-block d-md-flex align-items-center">
+                        <h2 class="mb-0">$45850</h2>
+                        <p class="text-success ml-2 mb-0 font-weight-medium">+8.3%</p>
+                      </div>
+                      <h6 class="text-muted font-weight-normal"> 9.61% Since last month</h6>
+                    </div>
+                    <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                      <i class="icon-lg mdi mdi-wallet-travel text-danger ml-auto"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4 grid-margin">
+              <div class="card">
+                <div class="card-body">
+                  <h5>Purchase</h5>
+                  <div class="row">
+                    <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                      <div class="d-flex d-sm-block d-md-flex align-items-center">
+                        <h2 class="mb-0">$2039</h2>
+                        <p class="text-danger ml-2 mb-0 font-weight-medium">-2.1% </p>
+                      </div>
+                      <h6 class="text-muted font-weight-normal">2.27% Since last month</h6>
+                    </div>
+                    <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                      <i class="icon-lg mdi mdi-monitor text-success ml-auto"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>' ;
+          }
+          ?>
+           
+            
+            <div class="row ">
+              <div class="col-12 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Order Status</h4>
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>
+                              <div class="form-check form-check-muted m-0">
+                                <label class="form-check-label">
+                                  <input type="checkbox" class="form-check-input">
+                                </label>
+                              </div>
+                            </th>
+                            <th> Client Name </th>
+                            <th> Order No </th>
+                            <th> Product Cost </th>
+                            <th> Project </th>
+                            <th> Payment Mode </th>
+                            <th> Start Date </th>
+                            <th> Payment Status </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <div class="form-check form-check-muted m-0">
+                                <label class="form-check-label">
+                                  <input type="checkbox" class="form-check-input">
+                                </label>
+                              </div>
+                            </td>
+                            <td>
+                              <img src="assets/images/faces/face1.jpg" alt="image" />
+                              <span class="pl-2">Henry Klein</span>
+                            </td>
+                            <td> 02312 </td>
+                            <td> $14,500 </td>
+                            <td> Dashboard </td>
+                            <td> Credit card </td>
+                            <td> 04 Dec 2019 </td>
+                            <td>
+                              <div class="badge badge-outline-success">Approved</div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <div class="form-check form-check-muted m-0">
+                                <label class="form-check-label">
+                                  <input type="checkbox" class="form-check-input">
+                                </label>
+                              </div>
+                            </td>
+                            <td>
+                              <img src="assets/images/faces/face2.jpg" alt="image" />
+                              <span class="pl-2">Estella Bryan</span>
+                            </td>
+                            <td> 02312 </td>
+                            <td> $14,500 </td>
+                            <td> Website </td>
+                            <td> Cash on delivered </td>
+                            <td> 04 Dec 2019 </td>
+                            <td>
+                              <div class="badge badge-outline-warning">Pending</div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <div class="form-check form-check-muted m-0">
+                                <label class="form-check-label">
+                                  <input type="checkbox" class="form-check-input">
+                                </label>
+                              </div>
+                            </td>
+                            <td>
+                              <img src="assets/images/faces/face5.jpg" alt="image" />
+                              <span class="pl-2">Lucy Abbott</span>
+                            </td>
+                            <td> 02312 </td>
+                            <td> $14,500 </td>
+                            <td> App design </td>
+                            <td> Credit card </td>
+                            <td> 04 Dec 2019 </td>
+                            <td>
+                              <div class="badge badge-outline-danger">Rejected</div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <div class="form-check form-check-muted m-0">
+                                <label class="form-check-label">
+                                  <input type="checkbox" class="form-check-input">
+                                </label>
+                              </div>
+                            </td>
+                            <td>
+                              <img src="assets/images/faces/face3.jpg" alt="image" />
+                              <span class="pl-2">Peter Gill</span>
+                            </td>
+                            <td> 02312 </td>
+                            <td> $14,500 </td>
+                            <td> Development </td>
+                            <td> Online Payment </td>
+                            <td> 04 Dec 2019 </td>
+                            <td>
+                              <div class="badge badge-outline-success">Approved</div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <div class="form-check form-check-muted m-0">
+                                <label class="form-check-label">
+                                  <input type="checkbox" class="form-check-input">
+                                </label>
+                              </div>
+                            </td>
+                            <td>
+                              <img src="assets/images/faces/face4.jpg" alt="image" />
+                              <span class="pl-2">Sallie Reyes</span>
+                            </td>
+                            <td> 02312 </td>
+                            <td> $14,500 </td>
+                            <td> Website </td>
+                            <td> Credit card </td>
+                            <td> 04 Dec 2019 </td>
+                            <td>
+                              <div class="badge badge-outline-success">Approved</div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        
+              </div>
+       
+            </div>
+           
+          </div>
+          <!-- content-wrapper ends -->
+          <!-- partial:partials/_footer.html -->
+          <footer class="footer">
+            <div class="d-sm-flex justify-content-center justify-content-sm-between">
+              <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2020</span>
+              <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin templates</a> from Bootstrapdash.com</span>
+            </div>
+          </footer>
+          <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="assets/vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="assets/vendors/chart.js/Chart.min.js"></script>
+    <script src="assets/vendors/progressbar.js/progressbar.min.js"></script>
+    <script src="assets/vendors/jvectormap/jquery-jvectormap.min.js"></script>
+    <script src="assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="assets/vendors/owl-carousel-2/owl.carousel.min.js"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="assets/js/off-canvas.js"></script>
+    <script src="assets/js/hoverable-collapse.js"></script>
+    <script src="assets/js/misc.js"></script>
+    <script src="assets/js/settings.js"></script>
+    <script src="assets/js/todolist.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <script src="assets/js/dashboard.js"></script>
+    <!-- End custom js for this page -->
+  </body>
 </html>

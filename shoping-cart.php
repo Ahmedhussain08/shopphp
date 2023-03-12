@@ -407,72 +407,62 @@ $total=0;
 		</div>
 	</div>
 
-							<form action="" method="POST">
-                               <?php
-							  
-							   
-							//    print_r($_SESSION['cart']);
-							//    $i = 1;
-							if(isset($_SESSION['cart'])) :?>
-						
-						<div class="container my-2">
-							<div class="col-md-12 mx-auto border d-flex justify-content-end align-items-center">
-							<button class="fs-27 mx-2 text-danger"  name="empty-cart" type="submit" value="">
-             Remove All <i class="fa fa-trash text-danger fs-30"></i>
-							</button>
-							</div>
-
-  <div class="row align-items-center mx-auto ">
-    <?php foreach($_SESSION['cart'] as $key => $value) :?> 
-      
-      <div class="col-md-2 text-center my-2 border"> 
-        <img style="" class="img-fluid my-2" src="admin/productimages/<?php echo $value['image'] ?>" alt="">
-      </div>
-
-      <div class="col-md-7 "> 
-        <div class="row  border ">
-          <div class="col-md-12 mb-2 ">
-            <h3 class="color1 my-2"><?php echo $value['name'] ?></h3>
-          </div>
-          <div class="col-md-8 mb-2">
-            Price : <h3 class="color1">RS. <?php echo $value['price'] ?></h3>
-          </div>
-          <div class="col-md-8 mb-3">
-            <h3 class="">Quantity : <span class="color1"><?php echo $value['qty'] ?></span> </h3>
-          </div>
-        </div>    
-      </div>
-
-      <div id="cart" class="col-md-3 my-2 border  py-4">
-  <div class="row">
-    <div class="col-md-10  d-flex flex-row justify-content-center align-items-center mb-4">
-      <p class="text-danger mx-2">Remove from cart</p>
-      <a class="fs-30" href="shoping-cart.php?remove=<?php echo $value['proid'] ?>" class="" name="remove" type="submit" value="remove">
-        <i class="fa fa-trash text-danger"></i>
-      </a>
+	<form action="" method="POST">
+  <?php
+    if(isset($_SESSION['cart'])) :
+  ?>
+  <div class="container my-2">
+    <div class="col-md-12 mx-auto border d-flex justify-content-end align-items-center">
+      <button class="fs-27 mx-2 text-danger" name="empty-cart" type="submit" value="">
+        Remove All <i class="fa fa-trash text-danger fs-30"></i>
+      </button>
     </div>
+    <div class="row align-items-center mx-auto ">
+      <?php foreach($_SESSION['cart'] as $key => $value) :?> 
+        <div class="col-md-2 text-center my-2 border"> 
+          <img style="" class="img-fluid my-2" src="admin/productimages/<?php echo $value['image'] ?>" alt="">
+        </div>
+        <div class="col-md-7 "> 
+          <div class="row  border ">
+            <div class="col-md-12 mb-2 ">
+              <h3 class="color1 my-2"><?php echo $value['name'] ?></h3>
+            </div>
+            <div class="col-md-8 mb-2">
+              Price : <h3 class="color1">RS. <?php echo $value['price'] ?></h3>
+            </div>
+            <div class="col-md-8 mb-3">
+              <h3 class="">Quantity : <span class="color1"><?php echo $value['qty'] ?></span> </h3>
+            </div>
+          </div>    
+        </div>
+        <div id="cart" class="col-md-3 my-2 border  py-4">
+          <div class="row">
+            <div class="col-md-10  d-flex flex-row justify-content-center align-items-center mb-4">
+              <p class="text-danger mx-2">Remove from cart</p>
+              <a class="fs-30" href="shoping-cart.php?remove=<?php echo $value['proid'] ?>" class="" name="remove" type="submit" value="remove">
+                <i class="fa fa-trash text-danger"></i>
+              </a>
+            </div>
+            <div class="col-md-9  my-3 mt-md-0 mt-3 text-center d-flex align-items-center ">
+              <p class="mb-0 mx-2">Total</p>
+              <h5 class="color1 mb-0 w-100">
+                RS. <?php echo $value['price']* $value['qty'] ;
+                $price =$value['price']* $value['qty'];
+                $total = $total + $price;
+                ?>
+              </h5>
+            </div>
+            <input value="<?php echo $value['proid'] ?>" type="hidden" name="">
+          </div>
+        </div>
+      <?php endforeach ?>
+	  <div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
+		  <div class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
+			  <h4 class="mtext-109 cl2 p-b-30">
+				  Cart Totals
+				</h4>
 
-    <div class="col-md-9  my-3 mt-md-0 mt-3 text-center d-flex align-items-center ">
-      <p class="mb-0 mx-2">Total</p>
-      <h5 class="color1 mb-0 w-100">
-        RS. <?php echo $value['price']* $value['qty'] ;
-        $price =$value['price']* $value['qty'];
-        $total = $total + $price;
-        ?>
-      </h5>
-    </div>
-	<input value="<?php echo $value['proid'] ?>" type="hidden" name="">
-  </div>
-</div>
-
-<hr>
-<div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
-					<div class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
-						<h4 class="mtext-109 cl2 p-b-30">
-							Cart Totals
-						</h4>
-
-						<div class="flex-w flex-t bor12 p-b-13">
+				<div class="flex-w flex-t bor12 p-b-13">
 							<div class="size-208">
 								<span class="stext-110 cl2">
 									Subtotal:
@@ -484,19 +474,19 @@ $total=0;
 								RS. 	<?php echo $total; ?>
 								</span>
 							</div>
+							<button  name="checkout" type="submit" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+								Proceed to Checkout
+							</button>
 						</div>
-						<button  name="checkout" type="submit" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
-							Proceed to Checkout
-						</button>
-
-<?php endforeach ?>
-<?php endif ?>    
-</div>  
-</div>
-<hr>           
-
-			
-			
+						
+						
+						<?php endif ?>
+					</div>  
+				</div>
+				<hr>           
+				
+				
+				
 
 						
 						

@@ -23,73 +23,75 @@ if(isset($_POST['btn'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="assets/css/main.min.css" rel="stylesheet" />
-    <link href="./assets/vendors/jvectormap/jquery-jvectormap-2.0.3.css" rel="stylesheet" />
-    <link href="./assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-
-    <title>Document</title>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+   <!-- plugins:css -->
+   <link rel="stylesheet" href="assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="assets/vendors/jvectormap/jquery-jvectormap.css">
+    <link rel="stylesheet" href="assets/vendors/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="assets/vendors/owl-carousel-2/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/vendors/owl-carousel-2/owl.theme.default.min.css">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="assets/images/favicon.png" />
 </head>
 <body>
-      <div class="container p-3 mt-4">
-      <h1 class="text-center">INSERT NEW PRODUCT</h1>
-      <div class="row">
-          <div class="col-11 mx-auto">
+<h1 class="text-center">INSERT NEW PRODUCT</h1>
+<form method="POST" class="mt-3 p-3" enctype="multipart/form-data">
+    <div class="form-group row">
+        <div class="col-md-6 my-4  text-white">
+            <label for="name">Enter PRODUCT Name</label>
+            <input name="name" type="text" class="form-control" id="name" placeholder="Enter name" required>
+        </div>
+        <div class="col-md-6 my-4  text-white">
+            <label for="price">Enter PRODUCT PRICE</label>
+            <input name="price" type="number" class="form-control" id="price" placeholder="Enter price" required>
+        </div>
+        <div class="col-md-6 my-4  text-white">
+            <label for="desc">Enter PRODUCT DESCRIPTIONS</label>
+            <input name="desc" type="text" class="form-control" id="desc" placeholder="Enter description" required>
+        </div>
 
-              <form method="POST" class="mt-3 p-3" enctype="multipart/form-data">
-              <div class="form-group mt-4">
-                    </div>
-                  <div class="form-group mt-4">
-                      <label for="exampleInputEmail1 mb-1">Enter PRODUCT Name</label>
-                      <input name="name" type="text" class="form-control mt-2" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name">
-                    </div>
-                  <div class="form-group mt-4">
-                      <label for="exampleInputEmail1 mb-1">Enter PRODUCT PRICE</label>
-                      <input name="price" type="number" class="form-control mt-2" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name">
-                    </div>
-                  <div class="form-group mt-4">
-                      <label for="exampleInputEmail1 mb-1">Enter PRODUCT DESCRIPTIONS</label>
-                      <input name="desc" type="text" class="form-control mt-2" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name">
-                    </div>
-                  <div class="form-group mt-4">
-                      <label for="exampleInputEmail1 mb-1">SELECT IMAGE</label>
-                      <input name="filename" type="file" class="form-control mt-2" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name">
-                    </div>
-                  <div class="form-group mt-4">
-                    <select class="form-control" name="catid" id="">
-                        <option selected disabled value=" ">SELECT CATEGORY</option>
-                        <?php
-                        $c = mysqli_query($con,"select * from category");
-                        while($row = mysqli_fetch_array($c))
-                        {
-                        echo ' <option value="'.$row[0].'">' .$row[1].' </option>';
-                        
-                        }
-                        ?>
-                    </select>
-                    </div>
-                  <div class="form-group mt-4">
-                    <select class="form-control" name="brandid" id="">
-                        <option selected disabled value=" ">SELECT BRAND</option>
-                        <?php
-                        $c = mysqli_query($con,"select * from brand");
-                        while($row = mysqli_fetch_array($c))
-                        {
-                        echo ' <option value="'.$row[0].'">' .$row[1].' </option>';
-                        
-                        }
-                        ?>
-                    </select>
-                    </div>
-                  
-                    <button name="btn" type="submit" class="btn btn-primary mt-2 text-center">ADD</button>
-                </form>
-            </div>
-</div>
-      </div>    
+        <div class="col-md-6 my-4  text-white">
+            <label for="filename">SELECT IMAGE</label>
+            <input name="filename" type="file" class="form-control-file" required >
+        </div>
+        <div class="col-md-6 my-4  text-white">
+            <label for="catid">SELECT CATEGORY</label>
+            <select class="form-control text-white" name="catid" id="catid" required>
+                <option selected  value="">SELECT CATEGORY</option>
+                <?php
+                    $c = mysqli_query($con,"select * from category");
+                    while($row = mysqli_fetch_array($c))
+                    {
+                        echo '<option value="'.$row[0].'">' .$row[1].'</option>';
+                    }
+                ?>
+            </select>
+        </div>
+        <div class="col-md-6 my-4">
+            <label for="brandid">SELECT BRAND</label>
+            <select class="form-control text-white" name="brandid" id="brandid" required>
+                <option selected  value="">SELECT BRAND</option>
+                <?php
+                    $c = mysqli_query($con,"select * from brand");
+                    while($row = mysqli_fetch_array($c))
+                    {
+                        echo '<option value="'.$row[0].'">' .$row[1].'</option>';
+                    }
+                ?>
+            </select>
+        </div>
+    </div>
+    <button name="btn" type="submit" class="btn btn-primary mt-1 text-center col-md-12 p-2 mx-auto">ADD PRODUCt</button>
+</form>
+
+
     <script src="./assets/js/scripts/dashboard_1_demo.js" type="text/javascript"></script>
      
 </body>

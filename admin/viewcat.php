@@ -1,5 +1,18 @@
 <?php
-include ('connect.php');
+include ("connect.php");
+$error = '';
+if(isset($_GET['deleteid'])){
+    try {
+    $del = $_GET['deleteid'];
+    $delete = mysqli_query($con,"DELETE FROM category WHERE cid ='$del'");
+    header("location:index.php?viewcat");
+}
+catch (mysqli_sql_exception $e) {
+// Display your custom error message
+$error= "<p>Unable to delete category: This category is currently being used by one or more products.</p>";
+}
+
+}
 ?>
 
 <!DOCTYPE html>
@@ -9,19 +22,30 @@ include ('connect.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">    
+    <link rel="stylesheet" href="assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="assets/vendors/jvectormap/jquery-jvectormap.css">
+    <link rel="stylesheet" href="assets/vendors/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="assets/vendors/owl-carousel-2/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/vendors/owl-carousel-2/owl.theme.default.min.css">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="assets/images/favicon.png" />
 </head>
 <body>
-    <div class="container mt-4 p-3">
+    <a href="index.php?addcat" class="btn btn-success my-2">ADD NEW</a>
+    <p><?php echo $error; ?></p>
         <div class="row">
-            <div class="col-11 mx-auto">
-                <a href="index.php?addcat" class="btn btn-success my-2">ADD NEW</a>
-                 <table class="table border border-3 bg-dark text-white" border='1'>
-                     <tr class=" bg-dark ">
-                         <thead class="" >
+            <div class="col-lg-11 col-xl-3 col-sm-6 grid-margin stretch-card mx-auto rounded">
+                 <table class="table border border-white border-3 bg-dark text-white rounded">
+                     <tr class="border border-white border-3 bg-dark ">
+                         <thead class="border border-white border-3" >
                              <th>S.NO</th>
                              <th> CATEGORY NAME</th>
                              <th> ACTIONS</th>
@@ -38,7 +62,7 @@ include ('connect.php');
                              <tr class="border border-primary border-2" >
                              <td class="border border-primary border-2 fw-bold fs-2" >'.$i++.'</td>
                              <td class="border border-primary border-2 fw-bold fs-3 text-uppercase">'.$data[1].'</td>
-                             <td class="border border-primary border-2" ><a href="viewcat.php?editid'.$data[0].'" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                             <td class="border border-primary border-2" ><a href="editcat.php?editcat='.$data[0].'" class="btn btn-primary" >
                              EDIT
                            </a>
                              <a href="viewcat.php?deleteid='.$data[0].'" class= "btn btn-danger"> delete <a/></td>
@@ -57,42 +81,34 @@ include ('connect.php');
                                 // header("location:index.php?viewcat");
                             }
                         }
-   
                         
-                         if(isset($_GET['deleteid'])){
-                             $del = $_GET['deleteid'];
-                             $delete = mysqli_query($con,"DELETE FROM category WHERE cid ='$del'");
-                             header("location:index.php?viewcat");
-                         }
+                         
                          
 
                      ?>
                  </table>
-                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <form action="" method="POST">
-      <div class="modal-body">
-        <div class="form-group mt-4">
-                      <label for="exampleInputEmail1 mb-1">Enter Category Name</label>
-                      <input name="name" type="text" class="form-control mt-2" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button name="editbtn" type="submit" class="btn btn-primary">Save changes</button>
-                </div>
+               
             </div>
         </div>
-    </form>
-</div>
-        </div>
-    </div>
 </body>
+<script src="assets/vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="assets/vendors/chart.js/Chart.min.js"></script>
+    <script src="assets/vendors/progressbar.js/progressbar.min.js"></script>
+    <script src="assets/vendors/jvectormap/jquery-jvectormap.min.js"></script>
+    <script src="assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="assets/vendors/owl-carousel-2/owl.carousel.min.js"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="assets/js/off-canvas.js"></script>
+    <script src="assets/js/hoverable-collapse.js"></script>
+    <script src="assets/js/misc.js"></script>
+    <script src="assets/js/settings.js"></script>
+    <script src="assets/js/todolist.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <script src="assets/js/dashboard.js"></script>
 </html>
 
 

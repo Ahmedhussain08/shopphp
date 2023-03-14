@@ -41,10 +41,10 @@ if(isset($_POST['btn'])){
 <body>
       <h1 class="text-center">INSERT NEW CATEGORY</h1>
       <div class="row">
-      <div class="col-lg-11 col-xl-3 col-sm-6 grid-margin stretch-card mx-auto rounded">
+      <div class="col-lg-11 col-md-9 col-xl-3 col-sm-6 grid-margin stretch-card mx-auto rounded">
 
 
-              <form method="POST" class="mt-3 p-3 col-lg-11 col-xl-3 col-sm-6">
+              <form method="POST" class="mt-3 p-3 col-lg-11 col-md-9 col-xl-3 col-sm-6">
               
                   <div class="form-group mt-4">
                       <label for="exampleInputEmail1 mb-1">Enter Category Name</label>

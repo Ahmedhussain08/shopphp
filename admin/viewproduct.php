@@ -43,7 +43,7 @@ if(isset($_GET['deletepro'])){
                     <p class="card-text  text- mt-2"><?php echo $row[3] ?></p>
                     <p href="" class="text-primary mt-2 fw-bold"> RS. <?php echo $row[2] ?></p>
                     <div class="d-flex justify-content-between">
-                        <a href="edit-product.php?productid=<?php echo $row[0] ?>" class="btn btn-secondary">Edit</a>
+                        <a href="edit-product.php?editpro=<?php echo $row[0] ?>" class="btn btn-secondary">Edit</a>
                         <a href="viewproduct.php?deletepro=<?php echo $row[0] ?>" class="btn btn-danger">Delete</a>
                     </div>
                 </div>
